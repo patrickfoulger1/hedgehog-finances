@@ -1,4 +1,4 @@
-import { Login } from "@/components/Login";
+import { LoginForm } from "@/app/login/login-form";
 import { GalleryVerticalEnd } from "lucide-react";
 
 export default function LoginPage() {
@@ -15,7 +15,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <Login></Login>
+            <LoginForm></LoginForm>
           </div>
         </div>
       </div>
