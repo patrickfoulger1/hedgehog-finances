@@ -2,6 +2,6 @@
 
 "use server";
 
-export const example = () => {
+export const example = async () => {
   console.log("I would run on server");
 };

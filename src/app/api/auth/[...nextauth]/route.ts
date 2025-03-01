@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/db";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import { User } from "@prisma/client";
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -34,6 +39,10 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        if (!user.password) {
+          return null;
+        }
+
         const isPasswordValid = await compare(
           credentials.password,
           user.password
@@ -50,8 +59,40 @@ export const authOptions: NextAuthOptions = {
         };
       },
     }),
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
+    async signIn({ account, profile }) {
+      if (account?.provider === "google") {
+        if (!profile?.email || !profile?.name) {
+          throw new Error("No profile");
+        }
+
+        //check if user already exists with credentials
+        const user = await prisma.user.findUnique({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        if (user) {
+          return true;
+        }
+
+        await prisma.user.create({
+          data: {
+            email: profile.email,
+            username: profile.name,
+            password: null,
+          },
+        });
+      }
+
+      return true;
+    },
     session: ({ session, token }) => {
       return {
         ...session,
@@ -71,6 +112,9 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
