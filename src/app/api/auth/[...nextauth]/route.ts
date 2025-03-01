@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/db";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import { User } from "@prisma/client";
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -50,8 +55,32 @@ export const authOptions: NextAuthOptions = {
         };
       },
     }),
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
+    async signIn({ account, profile }) {
+      if (!profile?.email || !profile?.name) {
+        throw new Error("No profile");
+      }
+
+      await prisma.user.upsert({
+        where: {
+          email: profile.email,
+        },
+        create: {
+          email: profile.email,
+          username: profile.name,
+        },
+        update: {
+          username: profile.name,
+        },
+      });
+
+      return true;
+    },
     session: ({ session, token }) => {
       return {
         ...session,
