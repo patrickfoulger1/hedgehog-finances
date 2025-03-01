@@ -39,6 +39,10 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        if (!user.password) {
+          return null;
+        }
+
         const isPasswordValid = await compare(
           credentials.password,
           user.password
@@ -62,22 +66,30 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ account, profile }) {
-      if (!profile?.email || !profile?.name) {
-        throw new Error("No profile");
-      }
+      if (account?.provider === "google") {
+        if (!profile?.email || !profile?.name) {
+          throw new Error("No profile");
+        }
 
-      await prisma.user.upsert({
-        where: {
-          email: profile.email,
-        },
-        create: {
-          email: profile.email,
-          username: profile.name,
-        },
-        update: {
-          username: profile.name,
-        },
-      });
+        //check if user already exists with credentials
+        const user = await prisma.user.findUnique({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        if (user) {
+          return true;
+        }
+
+        await prisma.user.create({
+          data: {
+            email: profile.email,
+            username: profile.name,
+            password: null,
+          },
+        });
+      }
 
       return true;
     },
