@@ -72,22 +72,24 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No profile");
         }
 
+        console.log(profile);
+
         //check if user already exists with credentials
         const user = await prisma.user.findUnique({
           where: {
             email: profile.email,
           },
         });
-
         if (user) {
           return true;
         }
 
-        await prisma.user.create({
+        const newUser = await prisma.user.create({
           data: {
             email: profile.email,
             username: profile.name,
             password: null,
+            image: profile?.picture,
           },
         });
       }
@@ -95,6 +97,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     session: ({ session, token }) => {
+      console.log(session);
       return {
         ...session,
         user: {
