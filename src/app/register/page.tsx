@@ -1,6 +1,6 @@
 import { RegisterForm } from "./RegisterForm";
 
-import AuthPage from "@/Components/AuthPage";
+import AuthPage from "@/components/AuthPage";
 
 export default function RegisterPage() {
   return (

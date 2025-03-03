@@ -1,36 +1,28 @@
-'use client'
-import { LineChart } from "@/components/lineChart"
-import { useEffect, useState } from "react";
-import Loader from "@/components/loader";
 import Header from "@/components/header";
-export default function DashboardPage() {
-    const [isLoading, setIsLoading] = useState(false)
-    const [stocks, setStocks] = useState([])
-    useEffect(() => {
-        setIsLoading(true)
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { Session } from "next-auth";
+import { prisma } from "@/lib/db";
+import { User } from "@prisma/client";
+export default async function DashboardPage() {
+  const session = (await getServerSession(authOptions)) as Session;
+  const user = (await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  })) as User;
 
-        setIsLoading(false)
-    }, [])
-    if (isLoading) {
-        return <Loader />
-    }
-    else {
-        if (!stocks.length) {
-            return (
-                <>
-                    <Header />
-                    <h1>Welcome back!</h1>
-                    <div className="controls">
-                        <button>Add stock to watchlist</button>
-                    </div>
-                    <div className="no-content"><p>No stocks added to the watchlist</p></div>
-                </>
-            )
-        }
-        else {
-            return (
-                <Header />
-            )
-        }
-    }
+  return (
+    <>
+      <Header user={user} />
+      <h1>Welcome back!</h1>
+      <div className="controls">
+        <button>Add stock to watchlist</button>
+      </div>
+      <div className="no-content">
+        <p>No stocks added to the watchlist</p>
+        {/* watch list client component */}
+      </div>
+    </>
+  );
 }

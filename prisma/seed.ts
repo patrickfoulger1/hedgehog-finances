@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
 const prisma = new PrismaClient();
+const secret = process.env.NEXTAUTH_SECRET;
 async function main() {
-  const password = await hash("password123", 12);
+  const password = await hash("password123" + secret, 12);
   const patrick = await prisma.user.upsert({
     where: { email: "patrickfoulger1@gmail.com" },
     update: {},
