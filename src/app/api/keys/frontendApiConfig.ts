@@ -1,0 +1,1 @@
+export const frontendApiKey = process.env.FRONTEND_API_KEY
