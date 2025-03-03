@@ -8,15 +8,13 @@ import { firebaseConfig } from "../../../lib/firebase.config";
 import { setCreds } from "./setCreds";
 
 const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
 
 export function NovuInbox() {
     useEffect(() => {
         Notification.requestPermission().then((permission) => {
             if (permission === "granted") {
-                getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC }).then((tokenId) => {
+                getToken(getMessaging(), { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC }).then((tokenId) => {
                     setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
-                    console.log("getToken", tokenId);
                 });
             }
         });
