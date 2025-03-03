@@ -11,29 +11,39 @@ export const example = async () => {
 
 const concatNames = (first: string, last: string) => {
   let username;
-  const lowerFirst = first.toLowerCase()
-  const lowerLast = last.toLowerCase()
-  function capitalizeFirstLetter(string: string) { return string.charAt(0).toUpperCase() + string.slice(1); }
+  const lowerFirst = first.toLowerCase();
+  const lowerLast = last.toLowerCase();
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
-  return capitalizeFirstLetter(lowerFirst) + " " + capitalizeFirstLetter(lowerLast);
-}
-
+  return (
+    capitalizeFirstLetter(lowerFirst) + " " + capitalizeFirstLetter(lowerLast)
+  );
+};
 
 export const handleSignup = async (formData: FormData) => {
   try {
-    const formEmail = formData.get("email") as string
-    // check user does not exist in db
-    const isUser = await prisma.user.findUnique({ where: { email: formEmail } })
+    const formEmail = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const firstName = formData.get("first-name") as string;
+    const lastName = formData.get("last-name") as string;
+    const username = concatNames(firstName, lastName);
 
-    // If user exists - some sort of front end notice that user email aleady in use
+    // check if user exists
+    const isUser = await prisma.user.findUnique({
+      where: { email: formEmail },
+    });
 
-    // if user does not exist create new user
-    if (isUser) { return "Email already in use" }
-    const password = formData.get("password") as string
-    const hashedPassword = await hash(password + process.env.NEXTAUTH_SECRET, 12)
-    const firstName = formData.get('first-name') as string
-    const lastName = formData.get('last-name') as string
-    const username = concatNames(firstName, lastName)
+    // if user already exists return error
+    if (isUser) {
+      return { error: "Email already in use" };
+    }
+
+    const hashedPassword = await hash(
+      password + process.env.NEXTAUTH_SECRET,
+      12
+    );
 
     const newUser = await prisma.user.create({
       data: {
@@ -42,17 +52,10 @@ export const handleSignup = async (formData: FormData) => {
         password: hashedPassword,
       },
     });
-    await signIn("credentials", {
-      redirect: false,
-      email: newUser.email,
-      password,
 
-    });
-    return null;
-
+    return { newUser };
   } catch (error) {
-    return "An error occured, please try again later."
+    console.log(error);
+    return { error: "An error occurred, please try again later." };
   }
-
-
-}
+};
