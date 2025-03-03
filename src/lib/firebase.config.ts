@@ -1,18 +1,9 @@
-import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging";
-
 //Firebase Config values imported from .env file
 export const firebaseConfig = {
-    apiKey: `${process.env.FIREBASEAPIKEY}`,
-    authDomain: `${process.env.PROJECTID}.firebaseapp.com`,
-    projectId: `${process.env.PROJECTID}`,
-    storageBucket: `${process.env.PROJECTID}.firebasestorage.app`,
-    messagingSenderId: `${process.env.MESSAGE_SENDER}`,
-    appId: `${process.env.NOTIFY_APPID}`,
+    apiKey: `${process.env.NEXT_PUBLIC_FIREBASEAPIKEY}`,
+    authDomain: `${process.env.NEXT_PUBLIC_PROJECTID}.firebaseapp.com`,
+    projectId: `${process.env.NEXT_PUBLIC_PROJECTID}`,
+    storageBucket: `${process.env.NEXT_PUBLIC_PROJECTID}.firebasestorage.app`,
+    messagingSenderId: `${process.env.NEXT_PUBLIC_MESSAGE_SENDER}`,
+    appId: `${process.env.NEXT_PUBLIC_NOTIFY_APPID}`,
 };
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Messaging service
-export const messaging = getMessaging(app);
