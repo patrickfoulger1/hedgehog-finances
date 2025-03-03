@@ -36,14 +36,15 @@ export function NovuInbox() {
             },
             preferencesContainer: {
                 borderRadius: "0.5rem",
+                margin: "10px",
             },
         },
     };
 
     return (
-        <div className="bg-gray-300 rounded-lg w-full m-5 p-5">
+        <div className="bg-gray-300 rounded-lg w-full">
             <Inbox
-                applicationIdentifier={`${process.env.NOVU_APP_ID}`}
+                applicationIdentifier={"" + process.env.NEXT_PUBLIC_NOVU_APP_ID}
                 subscriberId="4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9" // needs to come from the user session
                 routerPush={(path: string) => router.push(path)}
                 tabs={tabs}
