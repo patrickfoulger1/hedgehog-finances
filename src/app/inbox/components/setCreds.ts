@@ -6,7 +6,6 @@ const novu = new Novu({
 });
 
 export async function setCreds(tokenId: string, subscriberId: string) {
-    console.log(typeof tokenId);
     const result = await novu.subscribers.credentials.update(
         {
             providerId: "fcm",
@@ -16,5 +15,4 @@ export async function setCreds(tokenId: string, subscriberId: string) {
         },
         `${subscriberId}`
     );
-    console.log("setCreds", result);
 }
