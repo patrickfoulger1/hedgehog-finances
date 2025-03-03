@@ -8,7 +8,7 @@ async function main() {
     update: {},
     create: {
       email: "patrickfoulger1@gmail.com",
-      username: "patrickfoulger1",
+      username: "Patrick Foulger",
       password,
       watchlist: {
         create: [
