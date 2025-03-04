@@ -12,8 +12,9 @@ const app = initializeApp(firebaseConfig);
 
 export function NovuInbox({ watchlist }: { watchlist: any }) {
     const router = useRouter();
+    let tabs: { label: string; filter: { tags: string[] } }[] = [];
 
-    const tabs = [
+    tabs = [
         {
             label: "All Notifications",
             filter: { tags: [] },
@@ -30,7 +31,10 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
         });
 
         watchlist.forEach((symbol: WatchlistStock) => {
-            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol] } });
+            tabs.push({
+                label: symbol.stockSymbol,
+                filter: { tags: [symbol.stockSymbol] },
+            });
         });
     }, []);
 
