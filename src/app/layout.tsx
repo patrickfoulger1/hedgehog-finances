@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="HedgeHog" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-dvh w-dvw`}
       >
         <ThemeProvider
           attribute="class"

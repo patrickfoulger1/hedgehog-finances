@@ -1,8 +1,10 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useRouter } from "next/navigation";
 
 export function GoogleAuthButton({
   setError,
@@ -11,10 +13,18 @@ export function GoogleAuthButton({
   setError: React.Dispatch<React.SetStateAction<string | null>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    if (session) {
+      router.push("/dashboard");
+    }
+  }, [router]);
+
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError(null);
-    signIn("google");
+    const result = await signIn("google", { redirect: false });
   };
 
   return (

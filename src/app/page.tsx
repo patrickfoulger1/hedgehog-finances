@@ -1,12 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
-import hedgehogIcon from "../assets/icons/icon.png";
-import { Button } from "@/components/ui/button";
 
-export default function Home() {
+import hedgehogIcon from "../assets/icons/icon.png";
+
+import { LandingButtons } from "./landingButtons";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const session = await getServerSession();
+  if (session) {
+    redirect("/dashboard"); // Redirects if no session
+  }
+
   return (
     <>
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-full w-full p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <div className="absolute top-0 left-0 w-full h-full bg-blue-900 clip-triangle"></div>
         <main className="flex flex-col gap-8 row-start-2 items-center z-20">
           <section className="flex items-center gap-2 font-medium select-none">
@@ -26,12 +34,7 @@ export default function Home() {
             <li>Get notified in real time</li>
           </ol>
 
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <Button className="bg-blue-900 text-white cursor-pointer hover:bg-blue-800">
-              Sign In
-            </Button>
-            <Button className="cursor-pointer">Create Account</Button>
-          </div>
+          <LandingButtons></LandingButtons>
         </main>
         <footer className="z-20 text-xs text-stone-500 absolute bottom-3">
           hedgehog™ a finance company
