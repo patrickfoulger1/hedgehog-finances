@@ -42,7 +42,7 @@ export const LineChart = ({ stockValues, stockMetaData }: { stockValues: StockVa
             <CardHeader>
                 <CardTitle>{stockMetaData.symbol}</CardTitle>
                 <CardDescription>
-                    Changes for the last 15 trading hours
+                    Changes for the last 25 trading hours
                 </CardDescription>
             </CardHeader>
             <CardContent>

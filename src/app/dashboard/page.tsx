@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
 import { User } from "@prisma/client";
+import Charts from "./charts";
 export default async function DashboardPage() {
   const session = (await getServerSession(authOptions)) as Session;
   const user = (await prisma.user.findUnique({
@@ -11,7 +12,11 @@ export default async function DashboardPage() {
       email: session.user.email,
     },
   })) as User;
-
+  const stocks = (await prisma.watchlist.findMany({
+    where: {
+      userId: session.user.id,
+    },
+  }))
   return (
     <>
       <Header user={user} />
@@ -19,10 +24,7 @@ export default async function DashboardPage() {
       <div className="controls">
         <button>Add stock to watchlist</button>
       </div>
-      <div className="no-content">
-        <p>No stocks added to the watchlist</p>
-        {/* watch list client component */}
-      </div>
+      <Charts stocks={stocks}></Charts>
     </>
   );
 }

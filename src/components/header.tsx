@@ -6,8 +6,6 @@ import { Session } from "next-auth";
 import { User } from "@prisma/client";
 
 export default function Header({ user }: { user: User }) {
-  console.log("hello");
-  console.log(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <header>
