@@ -30,7 +30,7 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
         });
 
         watchlist.forEach((symbol: WatchlistStock) => {
-            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol: string] } });
+            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol] } });
         });
     }, []);
 
