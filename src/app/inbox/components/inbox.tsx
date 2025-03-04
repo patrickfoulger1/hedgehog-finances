@@ -1,6 +1,6 @@
 "use client";
 import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
-
+import { WatchlistStock } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { initializeApp } from "firebase/app";
@@ -10,7 +10,7 @@ import { setCreds } from "./setCreds";
 
 const app = initializeApp(firebaseConfig);
 
-export function NovuInbox({ watchlist }) {
+export function NovuInbox({ watchlist }: { watchlist: any }) {
     const router = useRouter();
 
     const tabs = [
@@ -29,8 +29,8 @@ export function NovuInbox({ watchlist }) {
             }
         });
 
-        watchlist.forEach((symbol) => {
-            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol] } });
+        watchlist.forEach((symbol: WatchlistStock) => {
+            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol: string] } });
         });
     }, []);
 
