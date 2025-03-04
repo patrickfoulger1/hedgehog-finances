@@ -39,7 +39,7 @@ export function LoginForm({
       if (result?.error) {
         setError("Incorrect email or password");
       } else {
-        router.push("/"); //route to go to when login success
+        router.push("/dashboard"); //route to go to when login success
       }
     } catch (error) {
       setError("An error occurred. Please try again later.");
