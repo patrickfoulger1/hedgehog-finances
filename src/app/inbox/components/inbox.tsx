@@ -1,5 +1,6 @@
 "use client";
 import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { initializeApp } from "firebase/app";
@@ -8,36 +9,30 @@ import { firebaseConfig } from "../../../lib/firebase.config";
 import { setCreds } from "./setCreds";
 
 const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
 
-export function NovuInbox() {
-    useEffect(() => {
-        Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-                getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC }).then((tokenId) => {
-                    setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
-                    console.log("getToken", tokenId);
-                });
-            }
-        });
-    });
-
+export function NovuInbox({ watchlist }) {
     const router = useRouter();
+
     const tabs = [
-        // dummy for now
         {
             label: "All Notifications",
             filter: { tags: [] },
         },
-        {
-            label: "AAPL",
-            filter: { tags: ["AAPL"] },
-        },
-        {
-            label: "ORCL",
-            filter: { tags: ["ORCL"] },
-        },
     ];
+
+    useEffect(() => {
+        Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+                getToken(getMessaging(), { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC }).then((tokenId) => {
+                    setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
+                });
+            }
+        });
+
+        watchlist.forEach((symbol) => {
+            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol] } });
+        });
+    }, []);
 
     const appearance = {
         elements: {
