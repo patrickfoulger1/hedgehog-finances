@@ -1,5 +1,6 @@
 "use client";
 import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { initializeApp } from "firebase/app";
@@ -9,7 +10,16 @@ import { setCreds } from "./setCreds";
 
 const app = initializeApp(firebaseConfig);
 
-export function NovuInbox() {
+export function NovuInbox({ watchlist }) {
+    const router = useRouter();
+
+    const tabs = [
+        {
+            label: "All Notifications",
+            filter: { tags: [] },
+        },
+    ];
+
     useEffect(() => {
         Notification.requestPermission().then((permission) => {
             if (permission === "granted") {
@@ -18,24 +28,11 @@ export function NovuInbox() {
                 });
             }
         });
-    });
 
-    const router = useRouter();
-    const tabs = [
-        // dummy for now
-        {
-            label: "All Notifications",
-            filter: { tags: [] },
-        },
-        {
-            label: "AAPL",
-            filter: { tags: ["AAPL"] },
-        },
-        {
-            label: "ORCL",
-            filter: { tags: ["ORCL"] },
-        },
-    ];
+        watchlist.forEach((symbol) => {
+            tabs.push({ label: symbol.stockSymbol, filter: { tags: [symbol.stockSymbol] } });
+        });
+    }, []);
 
     const appearance = {
         elements: {
