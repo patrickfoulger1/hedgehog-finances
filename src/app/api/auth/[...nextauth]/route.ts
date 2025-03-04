@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import { User } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
@@ -72,8 +73,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No profile");
         }
 
-        console.log(profile);
-
         //check if user already exists with credentials
         const user = await prisma.user.findUnique({
           where: {
@@ -97,7 +96,6 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     session: ({ session, token }) => {
-      console.log(session);
       return {
         ...session,
         user: {
