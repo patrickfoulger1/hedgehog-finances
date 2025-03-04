@@ -21,6 +21,13 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
         },
     ];
 
+    watchlist.forEach((symbol: WatchlistStock) => {
+        tabs.push({
+            label: symbol.stockSymbol,
+            filter: { tags: [symbol.stockSymbol] },
+        });
+    });
+
     useEffect(() => {
         Notification.requestPermission().then((permission) => {
             if (permission === "granted") {
@@ -28,13 +35,6 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
                     setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
                 });
             }
-        });
-
-        watchlist.forEach((symbol: WatchlistStock) => {
-            tabs.push({
-                label: symbol.stockSymbol,
-                filter: { tags: [symbol.stockSymbol] },
-            });
         });
     }, []);
 
