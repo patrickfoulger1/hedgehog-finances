@@ -2,6 +2,12 @@ export type example = {
   keyName: string;
   optionalKey?: string;
 };
+export interface WatchlistStock {
+  addedAt: Date,
+  id: string,
+  stockSymbol: string,
+  userId: string
+}
 export interface StockMetaData {
   symbol: string;
   interval: string;
