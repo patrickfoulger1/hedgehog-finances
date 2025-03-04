@@ -12,11 +12,13 @@ export default async function DashboardPage() {
       email: session.user.email,
     },
   })) as User;
-  const stocks = (await prisma.watchlist.findMany({
+
+  const stocks = await prisma.watchlist.findMany({
     where: {
-      userId: session.user.id,
+      userId: user.id, //will error on anyone who signed up with google
     },
-  }))
+  });
+
   return (
     <>
       <Header user={user} />

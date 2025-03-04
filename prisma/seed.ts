@@ -14,7 +14,7 @@ async function main() {
       watchlist: {
         create: [
           {
-            stockSymbol: "APPL",
+            stockSymbol: "AAPL",
           },
           {
             stockSymbol: "NVDA",
