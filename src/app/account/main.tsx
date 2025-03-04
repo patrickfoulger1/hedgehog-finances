@@ -8,8 +8,6 @@ import React from "react";
 export default function Main({ user }: { user: User }) {
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    console.log(`yup`);
-
   }
 
   return (
