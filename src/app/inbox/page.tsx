@@ -1,6 +1,6 @@
 import { NovuInbox } from "./components/inbox";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
 
