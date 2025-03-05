@@ -64,6 +64,4 @@ export const updateProfileImage = async (url: string, user: User) => {
         data: { image: url }
     }
     )
-    console.log(`image successfully uploaded`);
-
 }
