@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { User } from "@prisma/client";
 import { prisma } from "@/lib/db";
@@ -42,13 +42,13 @@ export default function ProfilePhotoUpdater({ user }: { user: User }) {
   }
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center mt-2">
       <label className="flex items-center justify-center w-48 h-12 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-white hover:bg-gray-100">
         <span className="text-gray-700">Upload Image</span>
         <input type="file" onChange={handleFileChange} className="hidden" />
       </label>
       <div className={!isProgressBar ? "hidden" : "h-[6px] w-full border rounded overflow-hidden mt-1"}>
-        <div className="h-full bg-black transition-all duration-150"
+        <div className="h-full bg-primary transition-all duration-150"
           style={{ width: `${progressState}%` }}>
 
         </div>
