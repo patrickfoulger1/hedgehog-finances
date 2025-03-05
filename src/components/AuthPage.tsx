@@ -11,11 +11,6 @@ export default async function AuthPage({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-  if (session) {
-    redirect("/dashboard"); // Redirects if no session
-  }
-
   return (
     <>
       <div className="grid min-h-svh lg:grid-cols-2">
