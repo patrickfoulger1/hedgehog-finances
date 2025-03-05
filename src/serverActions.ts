@@ -1,8 +1,9 @@
 //write functions you want to happen in client components on the server here
 "use server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import { hash } from "bcrypt";
 import { signIn } from "next-auth/react";
+import { log } from "util";
 
 const prisma = new PrismaClient();
 
@@ -55,3 +56,14 @@ export const handleSignup = async (formData: FormData) => {
         return { error: "An error occurred, please try again later." };
     }
 };
+
+
+export const updateProfileImage = async (url: string, user: User) => {
+    await prisma.user.update({
+        where: { email: user.email },
+        data: { image: url }
+    }
+    )
+    console.log(`image successfully uploaded`);
+
+}
