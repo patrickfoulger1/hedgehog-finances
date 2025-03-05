@@ -1,10 +1,6 @@
 import Image from "next/image";
-
 import hedgehogIcon from "../assets/icons/icon.png";
-
 import { LandingButtons } from "./landingButtons";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
   return (
