@@ -1,12 +1,12 @@
 "use client"
-import { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { User } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { updateProfileImage } from "@/serverActions"
 import { useEdgeStore } from "@/lib/edgestore";
 
-export default function ProfilePhotoUpdater({ user }: { user: User }) {
+export default function ProfilePhotoUpdater({ user, setUserImage }: { user: User, setUserImage: Dispatch<SetStateAction<string>> }): React.JSX.Element {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progressState, setProgressState] = useState(0)
   const [isProgressBar, setIsProgressBar] = useState(false)
@@ -18,26 +18,24 @@ export default function ProfilePhotoUpdater({ user }: { user: User }) {
       return;
     }
     try {
-      if (selectedFile) {
-        const res = await edgestore.publicImages.upload({
-          file: selectedFile,
-          onProgressChange: (progress) => { setProgressState(progress) }
-        })
-        setIsProgressBar(prev => !prev)
-        // save image url to db
-        console.log(res.url, res.thumbnailUrl);
-        updateProfileImage(res.url, user)
-      }
-    } catch (error) {
-      console.log(error);
+      setIsProgressBar(true)
+      const res = await edgestore.publicImages.upload({
+        file: selectedFile,
+        onProgressChange: (progress) => { setProgressState(progress) }
+      })
+      updateProfileImage(res.url, user)
+      setUserImage(res.url)
 
+    } catch (error) {
+      console.log('Upload error:', error);
+    } finally {
+      setIsProgressBar(false)
     }
 
   }
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0])
-      setIsProgressBar((prev => !prev))
     }
   }
 
