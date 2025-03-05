@@ -62,7 +62,14 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
                     },
                     elements: {
                         inboxContent: {
+                            backgroundColor: "#ccc",
+                            borderRadius: "0.375rem",
+                            margin: "3px",
+                        },
+                        preferencesContainer: {
                             backgroundColor: "#fff",
+                            borderRadius: "0.375rem",
+                            margin: "5px",
                         },
                     },
                 }}>
