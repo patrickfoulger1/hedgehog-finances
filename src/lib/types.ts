@@ -1,7 +1,12 @@
+import { Prisma } from "@prisma/client";
+
 export type example = {
     keyName: string;
     optionalKey?: string;
 };
+
+export type User = Prisma.UserCreateInput;
+
 export interface WatchlistStock {
     addedAt: Date;
     id: string;
