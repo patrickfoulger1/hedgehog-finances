@@ -2,6 +2,7 @@
 "use server";
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcrypt";
+import { Novu } from "@novu/api";
 import { signIn } from "next-auth/react";
 
 const prisma = new PrismaClient();
@@ -48,7 +49,7 @@ export const handleSignup = async (formData: FormData) => {
                 password: hashedPassword,
             },
         });
-
+        console.log(newUser);
         return { newUser };
     } catch (error) {
         console.log(error);
