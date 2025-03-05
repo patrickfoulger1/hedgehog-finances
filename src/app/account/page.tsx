@@ -1,6 +1,5 @@
 import Header from "../../components/header";
 import Main from "./main";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";

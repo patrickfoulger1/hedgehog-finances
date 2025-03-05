@@ -3,12 +3,13 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import ProfilePhotoUpdater from "./profilePhotoUpdater";
 import { User } from "@prisma/client";
 import React, { useEffect, useState } from "react";
+import { signOut } from "next-auth/react";
 
 export default function Main({ user }: { user: User }) {
   const [userImage, setUserImage] = useState(user.image);
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(user);
+    signOut();
   };
   useEffect(() => {
     console.log(`this ran when userImage changed`);
