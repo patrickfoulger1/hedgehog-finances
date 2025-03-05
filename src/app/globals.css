@@ -241,7 +241,7 @@ nav a {
 
 button {
   background-color: #22287f;
-  color: #FFF;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -272,7 +272,6 @@ button {
 }
 
 @media only screen and (max-width: 880px) {
-
   .account .fullname,
   nav {
     display: none;
@@ -284,15 +283,17 @@ button {
 }
 
 .clip-triangle {
-  clip-path: polygon(89% 67%,
-      76% 57%,
-      57% 84%,
-      45% 71%,
-      26% 95%,
-      14% 88%,
-      0 100%,
-      100% 100%,
-      100% 48%);
+  clip-path: polygon(
+    89% 67%,
+    76% 57%,
+    57% 84%,
+    45% 71%,
+    26% 95%,
+    14% 88%,
+    0 100%,
+    100% 100%,
+    100% 48%
+  );
 }
 
 @media only screen and (max-width: 600px) {
@@ -322,8 +323,8 @@ button {
   max-height: calc(100vh - 80px);
   width: 100%;
   max-width: 300px;
-  backdrop-filter: blur(100);
-  -webkit-backdrop-filter: blur(100);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
   z-index: 10;
   padding: 15px;
   overflow: scroll;
@@ -333,7 +334,7 @@ button {
 }
 
 input {
-  border-color: var(--ring)
+  border-color: var(--ring);
 }
 
 .searchResults::-webkit-scrollbar {

@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { EdgeStoreProvider } from '../lib/edgestore';
+import { EdgeStoreProvider } from "../lib/edgestore";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,12 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content="HedgeHog" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-dvh w-dvw`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dvw-100 dvh-100`}
       >
         <ThemeProvider
           attribute="class"
@@ -39,9 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <EdgeStoreProvider>
-              {children}
-            </EdgeStoreProvider>
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
