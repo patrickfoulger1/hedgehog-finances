@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
 import { User } from "@prisma/client";
 import Charts from "./charts";
+import { Button } from "@/components/ui/button";
 export default async function DashboardPage() {
     const session = (await getServerSession(authOptions)) as Session;
     const user = (await prisma.user.findUnique({
@@ -23,9 +24,6 @@ export default async function DashboardPage() {
         <>
             <Header user={user} />
             <h1>Welcome back!</h1>
-            <div className="controls">
-                <button>Add stock to watchlist</button>
-            </div>
             <Charts stocks={stocks}></Charts>
         </>
     );

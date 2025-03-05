@@ -146,13 +146,13 @@ a:hover {
 header {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
 }
 
 nav {
   padding: 15px 20px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
+  border-radius: 10px;
+  border: 1px solid var(--ring);
+  margin: 10px;
 }
 
 nav a {
@@ -163,24 +163,29 @@ nav a {
   display: flex;
   align-items: center;
   font-weight: 600;
+  margin: 10px;
 }
 
 .account img {
   height: 50px;
   width: 50px;
   margin-right: 15px;
+  border-radius: 50px;
 }
 
 .menu-controller {
+  margin: 10px;
   display: none;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   height: 50px;
   width: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid var(--ring);
+  color: var(--primary);
   align-items: center;
   justify-content: center;
   outline: none;
-  border: none;
   background: none;
   cursor: pointer;
   position: relative;
@@ -188,7 +193,6 @@ nav a {
 
 .dropdown {
   padding: 20px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   position: absolute;
   top: 60px;
@@ -196,7 +200,8 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: start;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(100px);
+  border: 1px solid var(--ring);
 }
 
 .loader-container {
@@ -234,11 +239,8 @@ nav a {
   justify-content: end;
 }
 
-.controls button {
-  background-color: #25b09b;
-  padding: 15px 20px;
-  border-radius: 50px;
-  margin: 20px;
+button {
+  background-color: #22287f;
   color: #FFF;
   cursor: pointer;
 }
@@ -262,7 +264,15 @@ nav a {
   width: 500px;
 }
 
-@media only screen and (max-width: 520px) {
+@media only screen and (max-width: 1158px) {
+  .charts {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+
   .account .fullname,
   nav {
     display: none;
@@ -272,25 +282,73 @@ nav a {
     display: flex;
   }
 }
+
 .clip-triangle {
-  clip-path: polygon(
-    89% 67%,
-    76% 57%,
-    57% 84%,
-    45% 71%,
-    26% 95%,
-    14% 88%,
-    0 100%,
-    100% 100%,
-    100% 48%
-  );
+  clip-path: polygon(89% 67%,
+      76% 57%,
+      57% 84%,
+      45% 71%,
+      26% 95%,
+      14% 88%,
+      0 100%,
+      100% 100%,
+      100% 48%);
 }
+
 @media only screen and (max-width: 600px) {
-  .charts {
-    flex-direction: column;
-    align-items: center;
-  }
   .my-chart .text-xs {
     width: 100%;
   }
+  .searchResults {
+    max-width: 100% !important;
+  }
+}
+
+.search-account-area {
+  display: flex;
+  align-items: center;
+}
+
+.searchBarArea {
+  position: relative;
+  margin: 0px 10px;
+  width: 300px;
+}
+
+.searchResults {
+  position: absolute;
+  top: 45px;
+  height: fit-content;
+  max-height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 300px;
+  backdrop-filter: blur(100);
+  -webkit-backdrop-filter: blur(100);
+  z-index: 10;
+  padding: 15px;
+  overflow: scroll;
+  scrollbar-width: none;
+  border-radius: 10px;
+  border: 1px solid var(--ring);
+}
+
+input {
+  border-color: var(--ring)
+}
+
+.searchResults::-webkit-scrollbar {
+  display: none;
+}
+
+.searchResults .stock {
+  margin: 5px 0px;
+  display: block;
+}
+
+.noData {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
