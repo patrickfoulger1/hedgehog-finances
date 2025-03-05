@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { User } from "@prisma/client";
 import { prisma } from "@/lib/db";
