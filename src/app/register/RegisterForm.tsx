@@ -31,16 +31,17 @@ export function RegisterForm({
       const formData = new FormData(e.currentTarget);
 
       const { error, newUser } = await handleSignup(formData);
+
       if (error) {
         setError(error);
       } else {
         await signIn("credentials", {
           redirect: false,
-          email: newUser?.email,
-          password: newUser?.password,
+          email: formData.get("email") as string,
+          password: formData.get("password") as string,
         });
 
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (error) {
       setError("Could not create account. Try again later");
