@@ -25,7 +25,7 @@ export default function Header({ user }: { user: User }) {
             <nav>
                 <Link href="/dashboard">Dashboard</Link>
                 <Link href="/stocks">All stocks</Link>
-                <Link href="/notifications">Notifications</Link>
+                <Link href="/inbox">Notifications</Link>
             </nav>
             <Link href="account" className="account">
                 <img src={user.image ? user.image : "media/profile-image.png"} />
