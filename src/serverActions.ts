@@ -6,6 +6,9 @@ import { Novu } from "@novu/api";
 import { signIn } from "next-auth/react";
 
 const prisma = new PrismaClient();
+const novu = new Novu({
+    secretKey: `${process.env.NEXT_PUBLIC_NOVU_SECRET_KEY}`,
+});
 
 export const example = async () => {
     console.log("I would run on server");
@@ -49,7 +52,12 @@ export const handleSignup = async (formData: FormData) => {
                 password: hashedPassword,
             },
         });
-        console.log(newUser);
+        const newSubscriber = await novu.subscribers.create({
+            firstName: newUser.username,
+            subscriberId: newUser.id,
+            email: newUser.email,
+        });
+
         return { newUser };
     } catch (error) {
         console.log(error);
