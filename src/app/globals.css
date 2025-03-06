@@ -264,9 +264,6 @@ button {
 
 .my-chart {
   margin: 20px;
-}
-
-.my-chart .text-xs {
   width: 500px;
 }
 
@@ -278,6 +275,7 @@ button {
 }
 
 @media only screen and (max-width: 880px) {
+
   .account .fullname,
   nav {
     display: none;
@@ -289,25 +287,30 @@ button {
 }
 
 .clip-triangle {
-  clip-path: polygon(
-    89% 67%,
-    76% 57%,
-    57% 84%,
-    45% 71%,
-    26% 95%,
-    14% 88%,
-    0 100%,
-    100% 100%,
-    100% 48%
-  );
+  clip-path: polygon(89% 67%,
+      76% 57%,
+      57% 84%,
+      45% 71%,
+      26% 95%,
+      14% 88%,
+      0 100%,
+      100% 100%,
+      100% 48%);
 }
 
 @media only screen and (max-width: 600px) {
-  .my-chart .text-xs {
-    width: 100%;
+  .my-chart {
+    width: 90%;
   }
+
   .searchResults {
     max-width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .searchBarArea {
+    width: 100% !important;
   }
 }
 
