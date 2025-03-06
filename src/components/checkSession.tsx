@@ -11,7 +11,7 @@ export function CheckSession() {
     if (session) {
       router.push("/dashboard");
     }
-  }, [router]);
+  }, [router, session]);
 
   return null;
 }

@@ -13,18 +13,18 @@ export function GoogleAuthButton({
   setError: React.Dispatch<React.SetStateAction<string | null>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   useEffect(() => {
     if (session) {
       router.push("/dashboard");
     }
-  }, [router]);
+  }, [router, session]);
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError(null);
-    const result = await signIn("google", { redirect: false });
+    await signIn("google", { redirect: false });
   };
 
   return (

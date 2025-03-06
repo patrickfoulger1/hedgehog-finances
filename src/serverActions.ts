@@ -12,7 +12,6 @@ export const example = async () => {
 };
 
 const concatNames = (first: string, last: string) => {
-  let username;
   const lowerFirst = first.toLowerCase();
   const lowerLast = last.toLowerCase();
   function capitalizeFirstLetter(string: string) {
@@ -72,31 +71,35 @@ export const updateProfileImage = async (url: string, user: User) => {
 // it returns true if stockSymbol is present in watchlist
 export const checkUserWatchlist = async (userId, stockSymbol) => {
   const watchlist = await prisma.watchlist.findMany({
-    where: { userId }
-  })
-  const isStock = isStockInWatchlist(watchlist, stockSymbol)
+    where: { userId },
+  });
+  const isStock = isStockInWatchlist(watchlist, stockSymbol);
   if (isStock.length !== 0) {
-    return true
-  } else { return false }
-}
+    return true;
+  } else {
+    return false;
+  }
+};
 
-
-export const updateWatchlist = async (userId: string, stockSymbol: string, buttonState: boolean) => {
+export const updateWatchlist = async (
+  userId: string,
+  stockSymbol: string,
+  buttonState: boolean
+) => {
   if (buttonState) {
     // remove stock from watchlist
     await prisma.watchlist.deleteMany({
       where: {
         userId,
         stockSymbol,
-      }
-    })
+      },
+    });
   } else {
     await prisma.watchlist.create({
       data: {
         userId,
         stockSymbol,
-      }
-    })
+      },
+    });
   }
-
-}
+};

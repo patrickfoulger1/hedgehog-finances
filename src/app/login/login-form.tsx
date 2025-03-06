@@ -20,7 +20,7 @@ export function LoginForm({
 
   useEffect(() => {
     setError(searchParams.get("error") ? "Couldn't sign you in" : null);
-  }, []);
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

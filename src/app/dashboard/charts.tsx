@@ -6,7 +6,7 @@ import { apiKey } from "../api/keys/frontendApiConfig";
 import { useEffect, useState } from "react";
 import { LineChart } from "@/components/lineChart";
 export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
-  const [stocksData, setStocksData] = useState<any[]>([]);
+  const [stocksData, setStocksData] = useState<StockData[]>([]);
   useEffect(() => {
     if (!stocks.length) return;
     Promise.all(
@@ -25,7 +25,7 @@ export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
     ).then((data) => {
       setStocksData(data);
     });
-  }, []);
+  }, [stocks]);
   if (!stocks.length) {
     return (
       <div className="no-content">

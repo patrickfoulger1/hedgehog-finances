@@ -1,8 +1,6 @@
 "use client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { User } from "@prisma/client";
-import { prisma } from "@/lib/db";
 import { updateProfileImage } from "@/serverActions";
 import { useEdgeStore } from "@/lib/edgestore";
 

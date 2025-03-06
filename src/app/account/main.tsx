@@ -1,5 +1,5 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import ProfilePhotoUpdater from "./profilePhotoUpdater";
 import { User } from "@prisma/client";
 import React, { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ export default function Main({ user }: { user: User }) {
       <h1 className="font-semibold">Account</h1>
       <figure className="w-full flex flex-col justify-center items-center">
         <img
-          src={userImage ? userImage : "media/profile-image.png"}
+          src={userImage ? userImage : "/media/profile-image.png"}
           className="object-cover aspect-square w-8/12 md:w-1/2 lg:w-100 rounded-full"
           alt="Profile"
         />
