@@ -41,7 +41,7 @@ function PushNotificationManager() {
         const registration = await navigator.serviceWorker.ready;
         const sub = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
+            applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC!),
         });
         setSubscription(sub);
         const serializedSub = JSON.parse(JSON.stringify(sub));
