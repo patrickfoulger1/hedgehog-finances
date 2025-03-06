@@ -1,5 +1,5 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import ProfilePhotoUpdater from "./profilePhotoUpdater";
 import { User } from "@prisma/client";
 import React, { useEffect, useState } from "react";
