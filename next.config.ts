@@ -1,7 +1,4 @@
 import type { NextConfig } from "next";
-import withSerwistInit from "@serwist/next";
-
-const revision = crypto.randomUUID();
 
 const nextConfig: NextConfig = {
     /* config options here */
@@ -40,18 +37,10 @@ const nextConfig: NextConfig = {
                         key: "Access-Control-Allow-Headers",
                         value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
                     },
-                    { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
                 ],
             },
         ];
     },
 };
 
-const withSerwist = withSerwistInit({
-    cacheOnNavigation: true,
-    swSrc: "src/app/sw.ts",
-    swDest: "public/sw.js",
-    additionalPrecacheEntries: [{ url: "/~offline", revision }],
-});
-
-export default withSerwist(nextConfig);
+export default nextConfig;
