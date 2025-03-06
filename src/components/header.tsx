@@ -2,12 +2,13 @@
 import Link from "next/link";
 import MobileMenu from "./mobileMenu";
 import SearchBar from "./searchbar";
-import { useState } from "react";
 import { Session } from "next-auth";
 import { User } from "@/lib/types";
+import { useState } from "react";
 
 export default function Header({ user }: { user: User }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
         <header>
             <button
