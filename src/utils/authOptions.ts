@@ -74,7 +74,6 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("No profile");
                 }
 
-                //check if user already exists with credentials
                 const user = await prisma.user.findUnique({
                     where: {
                         email: profile.email,
