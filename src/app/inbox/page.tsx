@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
+import Page from "@/components/push-notifications/PushNotifications";
 
 export default async function Notifications() {
     const session = (await getServerSession(authOptions)) as Session;
@@ -25,6 +26,7 @@ export default async function Notifications() {
         <div className="p-5">
             <Header user={user} />
             <NovuInbox watchlist={watchlist} />
+            <Page />
         </div>
     );
 }
