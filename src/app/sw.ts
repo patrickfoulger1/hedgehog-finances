@@ -22,7 +22,7 @@ const serwist = new Serwist({
     fallbacks: {
         entries: [
             {
-                url: "/~offline",
+                url: "/inbox/~offline",
                 matcher({ request }) {
                     return request.destination === "document";
                 },
