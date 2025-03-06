@@ -3,7 +3,6 @@ import Link from "next/link";
 import MobileMenu from "./mobileMenu";
 import SearchBar from "./searchbar";
 import { useState } from "react";
-import { Session } from "next-auth";
 import { User } from "@prisma/client";
 
 export default function Header({ user }: { user: User }) {
@@ -37,7 +36,7 @@ export default function Header({ user }: { user: User }) {
       </nav>
       <div className="search-account-area">
         <SearchBar />
-        <Link href="account" className="account">
+        <Link href="/account" className="account">
           <img src={user.image ? user.image : "media/profile-image.png"} />
           <div className="fullname">{user.username}</div>
         </Link>
