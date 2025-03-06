@@ -21,7 +21,8 @@ export default function Main({ user }: { user: User }) {
       <figure className="w-full flex flex-col justify-center items-center">
         <img
           src={userImage ? userImage : "media/profile-image.png"}
-          className="w-8/12 md:w-1/2 lg:w-100 rounded-full"
+          className="object-cover aspect-square w-8/12 md:w-1/2 lg:w-100 rounded-full"
+          alt="Profile"
         />
         <ProfilePhotoUpdater user={user} setUserImage={setUserImage} />
       </figure>
@@ -29,9 +30,7 @@ export default function Main({ user }: { user: User }) {
         <h2 className="text-2xl my-2">{user.username}</h2>
         <span className="mb-2">{user.email}</span>
         <Button
-          className={`${buttonVariants({
-            variant: "destructive",
-          })} w-2/12 lg:w-1/12 cursor-pointer`}
+          className={"logoutButton"}
           onClick={(e) => {
             handleLogout(e);
           }}

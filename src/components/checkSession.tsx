@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export function CheckSession() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   useEffect(() => {
     if (session) {

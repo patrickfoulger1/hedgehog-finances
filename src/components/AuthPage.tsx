@@ -3,8 +3,6 @@ import * as React from "react";
 import Image from "next/image";
 import hedgehogIcon from "../assets/icons/icon.png";
 import financeImage from "../assets/finance.svg";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export default async function AuthPage({
   children,
