@@ -32,7 +32,7 @@ export default function Header({ user }: { user: User }) {
       </button>
       <nav>
         <Link href="/dashboard">Dashboard</Link>
-        <Link href="/notifications">Notifications</Link>
+        <Link href="/inbox">Inbox</Link>
       </nav>
       <div className="search-account-area">
         <SearchBar />
