@@ -202,7 +202,7 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: start;
-  backdrop-filter: blur(100px);
+  background-color: var(--background);
   border: 1px solid var(--ring);
 }
 
@@ -329,8 +329,7 @@ button {
   max-height: calc(100vh - 80px);
   width: 100%;
   max-width: 300px;
-  backdrop-filter: blur(100px);
-  -webkit-backdrop-filter: blur(100px);
+  background: var(--background);
   z-index: 10;
   padding: 15px;
   overflow: scroll;
