@@ -42,9 +42,29 @@ async function main() {
       },
     },
   });
+  const andi = await prisma.user.upsert({
+    where: { email: "andi1@gmail.com" },
+    update: {},
+    create: {
+      email: "andi1@gmail.com",
+      username: "Andi Taz",
+      password,
+      watchlist: {
+        create: [
+          {
+            stockSymbol: "AAPL",
+          },
+          {
+            stockSymbol: "AMZN",
+          },
+        ],
+      },
+    },
+  });
 
   console.log(patrick, " added to db");
   console.log(drew, " added to db");
+  console.log(andi, " added to db");
 }
 main()
   .then(async () => {
