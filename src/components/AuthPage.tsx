@@ -3,19 +3,12 @@ import * as React from "react";
 import Image from "next/image";
 import hedgehogIcon from "../assets/icons/icon.png";
 import financeImage from "../assets/finance.svg";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export default async function AuthPage({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-  if (session) {
-    redirect("/dashboard"); // Redirects if no session
-  }
-
   return (
     <>
       <div className="grid min-h-svh lg:grid-cols-2">

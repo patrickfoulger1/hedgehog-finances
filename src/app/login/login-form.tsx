@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import { GoogleAuthButton } from "@/components/google-auth-button";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -105,9 +106,9 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
+        <Link href="/register" className="underline underline-offset-4">
           Sign up
-        </a>
+        </Link>
       </div>
     </form>
   );

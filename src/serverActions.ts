@@ -66,11 +66,9 @@ export const handleSignup = async (formData: FormData) => {
     }
 };
 
-
 export const updateProfileImage = async (url: string, user: User) => {
     await prisma.user.update({
         where: { email: user.email },
-        data: { image: url }
-    }
-    )
-}
+        data: { image: url },
+    });
+};
