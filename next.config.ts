@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
 
 const withSerwist = withSerwistInit({
     cacheOnNavigation: true,
-    swSrc: "src/sw.ts",
+    swSrc: "src/app/sw.ts",
     swDest: "public/sw.js",
     additionalPrecacheEntries: [{ url: "/~offline", revision }],
 });
