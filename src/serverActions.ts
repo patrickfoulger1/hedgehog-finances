@@ -2,8 +2,6 @@
 "use server";
 import { PrismaClient, User } from "@prisma/client";
 import { hash } from "bcrypt";
-import { signIn } from "next-auth/react";
-import { log } from "util";
 
 const prisma = new PrismaClient();
 
@@ -12,7 +10,6 @@ export const example = async () => {
 };
 
 const concatNames = (first: string, last: string) => {
-  let username;
   const lowerFirst = first.toLowerCase();
   const lowerLast = last.toLowerCase();
   function capitalizeFirstLetter(string: string) {

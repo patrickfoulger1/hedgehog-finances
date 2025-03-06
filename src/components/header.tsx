@@ -37,7 +37,10 @@ export default function Header({ user }: { user: User }) {
       <div className="search-account-area">
         <SearchBar />
         <Link href="/account" className="account">
-          <img src={user.image ? user.image : "media/profile-image.png"} />
+          <img
+            src={user.image ? user.image : "media/profile-image.png"}
+            alt="profile picture"
+          />
           <div className="fullname">{user.username}</div>
         </Link>
       </div>

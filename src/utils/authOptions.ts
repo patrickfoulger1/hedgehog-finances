@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import { User } from "@prisma/client";
 import { prisma } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { NextAuthOptions } from "next-auth";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
@@ -83,7 +82,7 @@ export const authOptions: NextAuthOptions = {
           return true;
         }
 
-        const newUser = await prisma.user.create({
+        await prisma.user.create({
           data: {
             email: profile.email,
             username: profile.name,
