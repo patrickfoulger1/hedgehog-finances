@@ -3,6 +3,8 @@
 import { PrismaClient, User } from "@prisma/client";
 import { hash } from "bcrypt";
 
+import { isStockInWatchlist } from "./utils/utils";
+
 const prisma = new PrismaClient();
 
 export const example = async () => {
@@ -64,4 +66,40 @@ export const updateProfileImage = async (url: string, user: User) => {
     where: { email: user.email },
     data: { image: url },
   });
+};
+
+// it returns true if stockSymbol is present in watchlist
+export const checkUserWatchlist = async (userId, stockSymbol) => {
+  const watchlist = await prisma.watchlist.findMany({
+    where: { userId },
+  });
+  const isStock = isStockInWatchlist(watchlist, stockSymbol);
+  if (isStock.length !== 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const updateWatchlist = async (
+  userId: string,
+  stockSymbol: string,
+  buttonState: boolean
+) => {
+  if (buttonState) {
+    // remove stock from watchlist
+    await prisma.watchlist.deleteMany({
+      where: {
+        userId,
+        stockSymbol,
+      },
+    });
+  } else {
+    await prisma.watchlist.create({
+      data: {
+        userId,
+        stockSymbol,
+      },
+    });
+  }
 };

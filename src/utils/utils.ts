@@ -1,3 +1,5 @@
+import { WatchlistStock } from "@/lib/types"
+
 export const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const formattedDate = new Intl.DateTimeFormat("en-GB", {
@@ -11,3 +13,8 @@ export const formatDate = (dateString: string) => {
     }).format(date);
     return formattedDate.replace(",", "")
 };
+
+export const isStockInWatchlist = (watchlist: Array<WatchlistStock>, stockSymbol: String) => {
+    const isStockPresent = watchlist.filter(stock => stock.stockSymbol === stockSymbol)
+    return isStockPresent
+}
