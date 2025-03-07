@@ -2,11 +2,12 @@
 import { WatchlistStock } from "@/lib/types";
 import { StockData } from "@/lib/types";
 import { api } from "../api/keys/frontendApiConfig";
-import { apiKey } from "../api/keys/frontendApiConfig";
+import { apiKey, reservedApiKey } from "../api/keys/frontendApiConfig";
 import { useEffect, useState } from "react";
 import { LineChart } from "@/components/lineChart";
 export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
   const [stocksData, setStocksData] = useState<StockData[]>([]);
+  const [outOfCalls, setOutOfCalls] = useState(false)
   useEffect(() => {
     if (!stocks.length) return;
     Promise.all(
@@ -16,6 +17,18 @@ export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
             `/time_series?symbol=${stock.stockSymbol}&interval=30min&outputsize=50&apikey=${apiKey}`
           )
           .then(({ data }) => {
+            if (data.code) {
+              return api
+                .get(
+                  `/time_series?symbol=${stock.stockSymbol}&interval=30min&outputsize=50&apikey=${reservedApiKey}`
+                )
+                .then(({ data }) => {
+                  if (data.code) {
+                    setOutOfCalls(true)
+                  }
+                  return data
+                })
+            }
             return data;
           })
           .catch((error) => {
@@ -32,6 +45,13 @@ export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
         <p>No stocks added to the watchlist</p>
       </div>
     );
+  }
+  if (outOfCalls) {
+    return (
+      <div className="no-content">
+        <p>You reached your limit on API calls on free plan.<br></br>Please, try again in 60 seconds</p>
+      </div>
+    )
   }
   return (
     <div className="charts">
