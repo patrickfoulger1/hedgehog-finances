@@ -1,9 +1,10 @@
-import { FailedStockFetch, StockData, Watchlist } from "@/lib/types";
+import { FailedStockFetch, StockData } from "@/lib/types";
 
 import { getStocks } from "../../utils/frontendApiConfig";
 
 import { LineChart } from "@/components/lineChart";
 import Link from "next/link";
+import { Watchlist } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 export default async function Charts({ stocks }: { stocks: Watchlist[] }) {

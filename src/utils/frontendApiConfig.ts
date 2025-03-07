@@ -63,3 +63,10 @@ export async function getStocks(symbols: string[]) {
     ...failedStocks,
   ];
 }
+
+export async function getStockList() {
+  try {
+    const { data } = await api.get(`/stocks?country=USA`);
+    return data;
+  } catch (error) {}
+}

@@ -15,8 +15,6 @@ export default async function StockPage({
   const stockData: (StockData | FailedStockFetch)[] = await getStocks([symbol]);
   const failedStockFetch = stockData[0] as FailedStockFetch;
   const stock = stockData[0] as StockData;
-  console.log("HIIII");
-  console.log(stock);
   if (failedStockFetch.status === "rejected") {
     return (
       <>
