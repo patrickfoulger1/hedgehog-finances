@@ -9,20 +9,13 @@ export default function AddToWatchlistBtn({ userId, stockSymbol, isSymbolOnWatch
 
   const handleClick = async () => {
     try {
-      //  if buttonState true click should remove stock from watchlist
-      //  if buttonState false click should add stock from watchlist
-
-
       await updateWatchlist(userId, stockSymbol, buttonState)
       console.log(`watchlist updated`);
       setButtonState(prev => !prev)
-
     } catch (error) {
       console.log(error);
-
     }
   }
-
   return (<Button className={!buttonState ? `` : `logoutButton`} onClick={handleClick}>
     {!buttonState ? `Add to Wachlist` : `Remove from watchlist`}
   </Button>)

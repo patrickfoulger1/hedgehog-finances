@@ -5,6 +5,7 @@ import { api } from "../api/keys/frontendApiConfig";
 import { apiKey, reservedApiKey } from "../api/keys/frontendApiConfig";
 import { useEffect, useState } from "react";
 import { LineChart } from "@/components/lineChart";
+
 export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
   const [stocksData, setStocksData] = useState<StockData[]>([]);
   const [outOfCalls, setOutOfCalls] = useState(false)
