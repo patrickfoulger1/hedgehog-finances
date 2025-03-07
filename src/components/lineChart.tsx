@@ -31,10 +31,11 @@ export const LineChart = ({ stockValues, stockMetaData }: { stockValues: StockVa
     const minValue = Math.min(...stockValues.map((value) => Math.floor(Number(value.low))));
     const maxValue = Math.max(...stockValues.map((value) => Math.floor(Number(value.high))));
     const yAxisPadding = ((maxValue - minValue) * 0.1);
+    const colour = oldestEntry > latestEntry ? '#FF0000' : '#39ff00'
     const chartConfig = {
         close: {
             label: "Close",
-            color: "hsl(var(--chart-1))",
+            color: colour,
         }
     } satisfies ChartConfig
     return (

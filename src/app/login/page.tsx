@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function LoginPage() {
     return (
         <AuthPage>
-            <Suspense fallback={<>Loading</>}>
+            <Suspense fallback="Loading...">
                 <LoginForm />
             </Suspense>
         </AuthPage>

@@ -3,14 +3,12 @@ import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
 import { WatchlistStock } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
-import { firebaseConfig } from "../../../lib/firebase.config";
 import { setCreds } from "./setCreds";
 
-const app = initializeApp(firebaseConfig);
+//const app = initializeApp(firebaseConfig);
 
-export function NovuInbox({ watchlist }: { watchlist: any }) {
+export function NovuInbox({ watchlist }: { watchlist: WatchlistStock[] }) {
     const router = useRouter();
     let tabs: { label: string; filter: { tags: string[] } }[] = [];
 
@@ -31,7 +29,9 @@ export function NovuInbox({ watchlist }: { watchlist: any }) {
     useEffect(() => {
         Notification.requestPermission().then((permission) => {
             if (permission === "granted") {
-                getToken(getMessaging(), { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC }).then((tokenId) => {
+                getToken(getMessaging(), {
+                    vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC,
+                }).then((tokenId) => {
                     setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
                 });
             }

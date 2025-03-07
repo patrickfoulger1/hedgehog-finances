@@ -5,7 +5,7 @@ import AuthPage from "@/components/AuthPage";
 export default function RegisterPage() {
     return (
         <AuthPage>
-            <Suspense fallback={<>Loading</>}>
+            <Suspense fallback="Loading...">
                 <RegisterForm />
             </Suspense>
         </AuthPage>

@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { compare } from "bcrypt";
 import { User } from "@prisma/client";
 import { prisma } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { Novu } from "@novu/api";
 import { NextAuthOptions } from "next-auth";
 
