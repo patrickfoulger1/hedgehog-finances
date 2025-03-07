@@ -5,6 +5,8 @@ import { api } from "../api/keys/frontendApiConfig";
 import { apiKey } from "../api/keys/frontendApiConfig";
 import { useEffect, useState } from "react";
 import { LineChart } from "@/components/lineChart";
+import Link from "next/link";
+
 export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
   const [stocksData, setStocksData] = useState<StockData[]>([]);
   useEffect(() => {
@@ -38,6 +40,7 @@ export default function Charts({ stocks }: { stocks: WatchlistStock[] }) {
       {stocksData.map((stockData: StockData) => {
         return (
           <div key={stockData.meta.symbol} className="my-chart">
+            <Link href={`/stocks/${stockData.meta?.symbol}`}> Go to scock</Link>
             <LineChart
               stockValues={stockData.values}
               stockMetaData={stockData.meta}
