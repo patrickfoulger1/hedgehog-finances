@@ -13,7 +13,9 @@ export default function StockInfo({ stockData, userId, isSymbolOnWatchlist }) {
         <h1 className="">{stockData.meta.symbol}</h1>
         <AddToWatchlistBtn userId={userId} stockSymbol={stockData.meta.symbol} isSymbolOnWatchlist={isSymbolOnWatchlist} />
       </div>
-      <LineChart stockValues={stockData.values} stockMetaData={stockData.meta} ></LineChart>
+      <div className="w-10/12 mx-auto">
+        <LineChart stockValues={stockData.values} stockMetaData={stockData.meta} ></LineChart>
+      </div>
     </>
   )
 }
