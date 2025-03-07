@@ -2,11 +2,18 @@
 import Link from "next/link";
 import MobileMenu from "./mobileMenu";
 import SearchBar from "./searchbar";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { User } from "@prisma/client";
 
 export default function Header({ user }: { user: User }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('')
+  useEffect(() => {
+    setCurrentPage(window.location.href)
+  }, [])
+  const defaultProfilePicture = useMemo(() => 
+    currentPage.includes("stocks") ? "../media/profile-image.png" : "media/profile-image.png",
+  [currentPage]);
   return (
     <header>
       <button
@@ -38,7 +45,7 @@ export default function Header({ user }: { user: User }) {
         <SearchBar />
         <Link href="/account" className="account">
           <img
-            src={user.image ? user.image : "media/profile-image.png"}
+            src={user.image ? user.image : defaultProfilePicture}
             alt="profile picture"
           />
           <div className="fullname">{user.username}</div>
