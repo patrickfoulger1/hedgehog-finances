@@ -14,15 +14,16 @@ export default async function getStockData(symbol: string) {
     )
     .then(({ data }) => {
       if (data.code) {
-        console.log('Reached first limit')
-        return api.get(`/time_series?symbol=${symbol}&interval=30min&outputsize=50&apikey=${reservedApiKey}`)
+        console.log("Reached first limit");
+        return api
+          .get(
+            `/time_series?symbol=${symbol}&interval=30min&outputsize=50&apikey=${reservedApiKey}`
+          )
           .then(({ data }) => {
-            return data
-          })
+            return data;
+          });
       }
       return data;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => {});
 }
