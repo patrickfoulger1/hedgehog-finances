@@ -14,6 +14,7 @@ export const api = axios.create({
 });
 
 export async function getStockData(symbol: string, keyIndex: number) {
+  console.log("test");
   const apiKey = apiKeys[keyIndex];
   try {
     const { data } = await api.get(

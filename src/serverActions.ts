@@ -4,6 +4,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { hash } from "bcrypt";
 
 import { isStockInWatchlist } from "./utils/utils";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -102,4 +103,8 @@ export const updateWatchlist = async (
       },
     });
   }
+};
+
+export const revalidateDashboard = async () => {
+  revalidatePath("/dashboard");
 };

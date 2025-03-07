@@ -1,14 +1,23 @@
 import { FailedStockFetch, StockData } from "@/lib/types";
-
+import { unstable_cache } from "next/cache";
 import { getStocks } from "../../utils/frontendApiConfig";
 
 import { LineChart } from "@/components/lineChart";
 import Link from "next/link";
 import { Watchlist } from "@prisma/client";
 
-export const dynamic = "force-dynamic";
 export default async function Charts({ stocks }: { stocks: Watchlist[] }) {
-  const stockData: (StockData | FailedStockFetch)[] = await getStocks(
+  const getStocksWithCache = unstable_cache(
+    async (symbols) => {
+      return getStocks(symbols);
+    },
+    ["dashboard-stocks"],
+    {
+      revalidate: 1800,
+    }
+  );
+
+  const stockData: (StockData | FailedStockFetch)[] = await getStocksWithCache(
     stocks.map((stock) => stock.stockSymbol)
   );
 

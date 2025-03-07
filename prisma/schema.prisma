@@ -14,6 +14,7 @@ model User {
   password  String?
   image String?
   watchlist Watchlist[] 
+  contactPrefs ContactPreferences[]
 }
 
 model Watchlist {
@@ -21,7 +22,15 @@ model Watchlist {
   userId    String @db.ObjectId
   stockSymbol  String
   addedAt   DateTime @default(now())
-
   user  User  @relation(fields: [userId], references: [id])
+}
 
+model ContactPreferences {
+  id String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String @db.ObjectId
+  mobilePush  Boolean @default(false)
+  webPush     Boolean @default(false)
+  email       Boolean @default(false)
+  inApp       Boolean @default(true)
+  user  User  @relation(fields: [userId], references: [id])
 }
