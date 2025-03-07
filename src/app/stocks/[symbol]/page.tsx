@@ -1,8 +1,9 @@
-import { getStockData } from "@/utils/frontendApiConfig";
+import { getStocks } from "@/utils/frontendApiConfig";
 import Header from "@/components/header";
 import getSessionUser from "@/utils/getSessionUser";
 import StockInfo from "./stock-info";
 import { checkUserWatchlist } from "@/serverActions";
+import { FailedStockFetch, StockData } from "@/lib/types";
 
 export default async function StockPage({
   params,
@@ -11,8 +12,12 @@ export default async function StockPage({
 }) {
   const { symbol } = await params;
   const user = await getSessionUser();
-  const stockData = await getStockData(symbol, 0);
-  if (stockData.code) {
+  const stockData: (StockData | FailedStockFetch)[] = await getStocks([symbol]);
+  const failedStockFetch = stockData[0] as FailedStockFetch;
+  const stock = stockData[0] as StockData;
+  console.log("HIIII");
+  console.log(stock);
+  if (failedStockFetch.status === "rejected") {
     return (
       <>
         <Header user={user}></Header>
@@ -25,16 +30,17 @@ export default async function StockPage({
       </>
     );
   }
+
   const isSymbolOnWatchlist = await checkUserWatchlist(
     user.id,
-    stockData.meta.symbol
+    stock.meta.symbol
   );
   return (
     <>
       <Header user={user}></Header>
       <div className="max-w-300 mx-auto">
         <StockInfo
-          stockData={stockData}
+          stockData={stock}
           userId={user.id}
           isSymbolOnWatchlist={isSymbolOnWatchlist}
         ></StockInfo>

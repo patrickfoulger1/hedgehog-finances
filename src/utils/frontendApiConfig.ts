@@ -57,7 +57,7 @@ export async function getStocks(symbols: string[]) {
   }
 
   return [
-    successStocks.map(({ value }) => {
+    ...successStocks.map(({ value }) => {
       return value;
     }),
     ...failedStocks,

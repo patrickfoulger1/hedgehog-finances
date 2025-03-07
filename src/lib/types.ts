@@ -29,6 +29,16 @@ export interface StockData {
   status: string;
 }
 
+export interface StockError {
+  error: any;
+  symbol: string;
+}
+
+export interface FailedStockFetch {
+  status: string;
+  reason: StockError;
+}
+
 declare module "next-auth" {
   interface Session {
     user: {
