@@ -8,6 +8,7 @@ async function main() {
     where: { email: "patrickfoulger1@gmail.com" },
     update: {},
     create: {
+      id: "67cac6fc0d9b14f6f10643b8",
       email: "patrickfoulger1@gmail.com",
       username: "Patrick Foulger",
       password,
@@ -27,6 +28,7 @@ async function main() {
     where: { email: "drew@werd.uk" },
     update: {},
     create: {
+      id: "67cac6fc0d9b14f6f10643bb",
       email: "drew@werd.uk",
       username: "Drew Dodd",
       password,
@@ -46,6 +48,7 @@ async function main() {
     where: { email: "andi1@gmail.com" },
     update: {},
     create: {
+      id: "67caca3d2cc41a6be6731140",
       email: "andi1@gmail.com",
       username: "Andi Taz",
       password,
@@ -61,7 +64,6 @@ async function main() {
       },
     },
   });
-
   console.log(patrick, " added to db");
   console.log(drew, " added to db");
   console.log(andi, " added to db");
@@ -75,5 +77,3 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
-
-//test
