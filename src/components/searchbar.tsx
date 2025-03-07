@@ -1,6 +1,6 @@
 import { Input } from "./ui/input";
 import { useState } from "react";
-import { api } from "@/app/api/keys/frontendApiConfig";
+import { api } from "@/utils/frontendApiConfig";
 import SearchResults from "./searchResults";
 export default function SearchBar() {
   const [stockList, setStockList] = useState([]);

@@ -1,4 +1,4 @@
-import getStockData from "@/app/api/keys/frontendApiConfig";
+import { getStockData } from "@/utils/frontendApiConfig";
 import Header from "@/components/header";
 import getSessionUser from "@/utils/getSessionUser";
 import StockInfo from "./stock-info";
@@ -11,23 +11,33 @@ export default async function StockPage({
 }) {
   const { symbol } = await params;
   const user = await getSessionUser();
-  const stockData = await getStockData(symbol);
+  const stockData = await getStockData(symbol, 0);
   if (stockData.code) {
     return (
       <>
         <Header user={user}></Header>
         <div className="no-content">
-          <p>You reached your limit on API calls on free plan.<br></br>Please, try again in 60 seconds</p>
+          <p>
+            You reached your limit on API calls on free plan.<br></br>Please,
+            try again in 60 seconds
+          </p>
         </div>
       </>
-    )
+    );
   }
-  const isSymbolOnWatchlist = await checkUserWatchlist(user.id, stockData.meta.symbol)
+  const isSymbolOnWatchlist = await checkUserWatchlist(
+    user.id,
+    stockData.meta.symbol
+  );
   return (
     <>
       <Header user={user}></Header>
       <div className="max-w-300 mx-auto">
-        <StockInfo stockData={stockData} userId={user.id} isSymbolOnWatchlist={isSymbolOnWatchlist}></StockInfo>
+        <StockInfo
+          stockData={stockData}
+          userId={user.id}
+          isSymbolOnWatchlist={isSymbolOnWatchlist}
+        ></StockInfo>
       </div>
     </>
   );
