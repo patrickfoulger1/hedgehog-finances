@@ -39,7 +39,7 @@ export const LineChart = ({ stockValues, stockMetaData }: { stockValues: StockVa
         }
     } satisfies ChartConfig
     return (
-        <Card>
+        <Card className="lg:w-10/12 mx-auto">
             <CardHeader>
                 <CardTitle>{stockMetaData.symbol}</CardTitle>
                 <CardDescription>
