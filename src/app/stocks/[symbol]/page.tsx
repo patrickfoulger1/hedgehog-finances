@@ -54,15 +54,13 @@ export default async function StockPage({
   return (
     <>
       <Header user={user}></Header>
-      <div className="max-w-300 mx-auto">
+      <div className="sm:max-w-8/12 mx-auto border shadow-lg rounded-lg">
         <StockInfo
           stockData={stock}
           userId={user.id}
           isSymbolOnWatchlist={isSymbolOnWatchlist}
-          dividendInfo={dividendInfo}
         ></StockInfo>
-        {dividendInfo.length !== 0 ? <DividendInfoComponent dividendinfo={dividendInfo} /> : null
-        }
+        <DividendInfoComponent dividendinfo={dividendInfo} />
       </div>
     </>
   );

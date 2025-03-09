@@ -29,8 +29,9 @@ export default function AddToWatchlistBtn({
     <Button
       className={!buttonState ? `` : `logoutButton`}
       onClick={handleClick}
+      size="sm"
     >
-      {!buttonState ? `Add to Wactchlist` : `Remove from watchlist`}
+      {!buttonState ? `Add to Watchlist` : `Remove`}
     </Button>
   );
 }

@@ -14,7 +14,7 @@ export const api = axios.create({
 });
 
 export async function getStockData(symbol: string, keyIndex: number) {
-  console.log("test");
+  // console.log("test");
   const apiKey = apiKeys[keyIndex];
   try {
     const { data } = await api.get(
@@ -69,5 +69,5 @@ export async function getStockList() {
   try {
     const { data } = await api.get(`/stocks?country=USA`);
     return data;
-  } catch (error) {}
+  } catch (error) { }
 }

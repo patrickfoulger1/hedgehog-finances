@@ -3,7 +3,7 @@ import { LineChart } from "@/components/lineChart"
 import AddToWatchlistBtn from "@/components/addToWatchlistBtn"
 
 
-export default function StockInfo({ stockData, userId, isSymbolOnWatchlist, dividendInfo }) {
+export default function StockInfo({ stockData, userId, isSymbolOnWatchlist }) {
 
 
   return (
@@ -15,7 +15,6 @@ export default function StockInfo({ stockData, userId, isSymbolOnWatchlist, divi
       <div className="w-10/12 mx-auto">
         <LineChart stockValues={stockData.values} stockMetaData={stockData.meta} ></LineChart>
       </div>
-      <div>{dividendInfo.data.dividend}</div>
     </>
   )
 }
