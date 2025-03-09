@@ -5,6 +5,8 @@ import StockInfo from "./stock-info";
 import { checkUserWatchlist } from "@/serverActions";
 import { FailedStockFetch, StockData } from "@/lib/types";
 import { unstable_cache } from "next/cache";
+import DividendInfoComponent from "@/components/dividendInfoComponent";
+import getDividendInfo from "@/utils/finModelingConfig";
 
 export default async function StockPage({
   params,
@@ -25,6 +27,10 @@ export default async function StockPage({
   const stockData: (StockData | FailedStockFetch)[] = await getStocksWithCache([
     symbol,
   ]);
+
+  const dividendInfo = await getDividendInfo(symbol);
+
+
   const failedStockFetch = stockData[0] as FailedStockFetch;
   const stock = stockData[0] as StockData;
   if (failedStockFetch.status === "rejected") {
@@ -53,7 +59,10 @@ export default async function StockPage({
           stockData={stock}
           userId={user.id}
           isSymbolOnWatchlist={isSymbolOnWatchlist}
+          dividendInfo={dividendInfo}
         ></StockInfo>
+        {dividendInfo.length !== 0 ? <DividendInfoComponent dividendinfo={dividendInfo} /> : null
+        }
       </div>
     </>
   );

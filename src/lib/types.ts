@@ -28,6 +28,17 @@ export interface StockData {
   values: StockValue[];
   status: string;
 }
+export interface DividendInformation {
+  symbol: String;
+  date: String;
+  recordDate: String;
+  paymentDate: String;
+  declarationDate: String;
+  adjDividend: Number;
+  dividend: Number;
+  yield: Number;
+  frequency: String;
+}
 
 export interface StockError {
   error: any;
