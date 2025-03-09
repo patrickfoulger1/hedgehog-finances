@@ -54,7 +54,7 @@ export default async function StockPage({
   return (
     <>
       <Header user={user}></Header>
-      <div className="max-w-300 mx-auto">
+      <div className="max-w-8/12 max-h-3/6 mx-auto border">
         <StockInfo
           stockData={stock}
           userId={user.id}
