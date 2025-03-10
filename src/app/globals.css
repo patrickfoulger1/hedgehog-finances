@@ -175,6 +175,13 @@ nav a {
     object-fit: cover;
 }
 
+.inline-svg {
+    display: inline;
+    margin: 0 0.125em;
+    padding: 0;
+    vertical-align: baseline;
+}
+
 .menu-controller {
     margin: 10px;
     display: none;
@@ -241,8 +248,7 @@ nav a {
     justify-content: end;
 }
 
-button {
-    background-color: #22287f;
+.button {
     color: #fff;
     cursor: pointer;
 }
@@ -353,25 +359,25 @@ input {
     font-size: 12px;
 }
 h2 {
-  text-align: center;
-  font-size: 25px;
-  font-weight: 800;
-  margin: 30px 0px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 800;
+    margin: 30px 0px;
 }
 
 .news {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .news a {
-  margin: 15px;
-  width: 100%;
-  max-width: 600px;
+    margin: 15px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .news p {
-  color: var(--muted-foreground);
-  margin-bottom: 50px;
+    color: var(--muted-foreground);
+    margin-bottom: 50px;
 }
