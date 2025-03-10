@@ -34,8 +34,8 @@ self.addEventListener("install", async (event) => {
 self.addEventListener("push", function (event) {
     console.log("Push event received:", event);
     event.waitUntil(
-        self.registration.showNotification("New Notification", {
-            body: "You have a new message!",
+        self.registration.showNotification(event.notification.title, {
+            body: event.notification.body,
             icon: "/icon.png",
         })
     );
