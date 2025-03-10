@@ -10,7 +10,7 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const secret = process.env.NEXTAUTH_SECRET;
 const novu = new Novu({
-    secretKey: `${process.env.NEXT_PUBLIC_NOVU_SECRET_KEY}`,
+    secretKey: `${process.env.NOVU_SECRET_KEY}`,
 });
 
 export const authOptions: NextAuthOptions = {

@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 const novu = new Novu({
-    secretKey: `${process.env.NEXT_PUBLIC_NOVU_SECRET_KEY}`,
+    secretKey: `${process.env.NOVU_SECRET_KEY}`,
 });
 
 export const example = async () => {
@@ -106,5 +106,5 @@ export const updateWatchlist = async (userId: string, stockSymbol: string, butto
 };
 
 export const revalidateDashboard = async () => {
-  revalidatePath("/dashboard");
+    revalidatePath("/dashboard");
 };

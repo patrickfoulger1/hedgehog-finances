@@ -1,5 +1,5 @@
 "use client";
-import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
+import { Inbox, Bell, Notifications } from "@novu/react";
 import { Watchlist } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import { initializeApp } from "firebase/app";
 import { setCreds } from "./setCreds";
 import { User } from "@prisma/client";
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 export function NovuInbox({ user, watchlist }: { user: User; watchlist: Watchlist[] }) {
     const router = useRouter();
@@ -44,8 +44,8 @@ export function NovuInbox({ user, watchlist }: { user: User; watchlist: Watchlis
     if ("locks" in navigator) {
         return (
             <Inbox
-                applicationIdentifier={"" + process.env.NOVU_APP_ID}
-                subscriberId={user.id} // needs to come from the user session
+                applicationIdentifier={"" + process.env.NEXT_PUBLIC_NOVU_APP_ID}
+                subscriberId={user.id}
                 routerPush={(path: string) => router.push(path)}
                 tabs={tabs}
                 preferencesFilter={{ tags: [] }}
@@ -90,7 +90,6 @@ export function NovuInbox({ user, watchlist }: { user: User; watchlist: Watchlis
                     }}
                 />
                 <Notifications />
-                <Preferences />
             </Inbox>
         );
     } else {
