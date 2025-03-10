@@ -43,10 +43,13 @@ async function main() {
         ],
       },
       contactPrefs: {
-        create: [{ mobilePush: false, webPush: false, email: false, inApp: true }],
+        create: [
+          { mobilePush: false, webPush: false, email: false, inApp: true },
+        ],
       },
     },
   });
+
   const andi = await prisma.user.upsert({
     where: { email: "andi1@gmail.com" },
     update: {},

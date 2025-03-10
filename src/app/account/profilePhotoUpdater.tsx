@@ -3,8 +3,6 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { User } from "@prisma/client";
 import { updateProfileImage } from "@/serverActions";
 import { useEdgeStore } from "@/lib/edgestore";
-import { SingleImageDropzone } from "@/components/singleImgDropzone";
-import { Fascinate } from "next/font/google";
 
 export default function ProfilePhotoUpdater({
   user,
@@ -16,7 +14,7 @@ export default function ProfilePhotoUpdater({
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [progressState, setProgressState] = useState(0);
   const [isProgressBar, setIsProgressBar] = useState(false);
-  const [isErrorMessage, setIsErrorMessage] = useState('')
+  const [isErrorMessage, setIsErrorMessage] = useState("");
   const { edgestore } = useEdgeStore();
   useEffect(() => {
     const file = selectedFile;
@@ -43,8 +41,10 @@ export default function ProfilePhotoUpdater({
     } catch (error) {
       console.log("Upload error--->:", error);
       let message = error.toString().split(":")[1];
-      message = message.includes("File size is too big") ? "File size is too big. Max size is 1MB." : "Oops...! Only images are allowed."
-      setIsErrorMessage(message)
+      message = message.includes("File size is too big")
+        ? "File size is too big. Max size is 1MB."
+        : "Oops...! Only images are allowed.";
+      setIsErrorMessage(message);
     } finally {
       setIsProgressBar(false);
     }
@@ -52,7 +52,7 @@ export default function ProfilePhotoUpdater({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
-      setIsErrorMessage('')
+      setIsErrorMessage("");
     }
   };
 
@@ -62,18 +62,20 @@ export default function ProfilePhotoUpdater({
         <span className="text-white">Upload Image</span>
         <input type="file" onChange={handleFileChange} className="hidden" />
       </label>
-      {isErrorMessage !== '' && <p className="w-full text-xs text-red-500">{isErrorMessage}</p>}
+      {isErrorMessage !== "" && (
+        <p className="w-full text-xs text-red-500">{isErrorMessage}</p>
+      )}
       <div
         className={
           !isProgressBar
             ? "hidden"
             : "h-[6px] w-full border rounded overflow-hidden mt-1"
-        }>
+        }
+      >
         <div
           className="h-full bg-primary dark:bg-white transition-all duration-150"
-          style={{ width: `${progressState}%` }} >
-        </div>
-
+          style={{ width: `${progressState}%` }}
+        ></div>
       </div>
     </div>
   );

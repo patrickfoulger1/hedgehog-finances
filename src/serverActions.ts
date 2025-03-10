@@ -1,8 +1,7 @@
 //write functions you want to happen in client components on the server here
 "use server";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User, Watchlist } from "@prisma/client";
 import { hash } from "bcrypt";
-
 import { isStockInWatchlist } from "./utils/utils";
 import { revalidatePath } from "next/cache";
 
@@ -71,9 +70,9 @@ export const updateProfileImage = async (url: string, user: User) => {
 
 // it returns true if stockSymbol is present in watchlist
 export const checkUserWatchlist = async (userId, stockSymbol) => {
-  const watchlist = await prisma.watchlist.findMany({
+  const watchlist = (await prisma.watchlist.findMany({
     where: { userId },
-  });
+  })) as Watchlist[];
   const isStock = isStockInWatchlist(watchlist, stockSymbol);
   if (isStock.length !== 0) {
     return true;

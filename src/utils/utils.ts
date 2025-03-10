@@ -1,4 +1,4 @@
-import { Watchlist } from "@/lib/types";
+import { Watchlist } from "@prisma/client";
 
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -15,7 +15,7 @@ export const formatDate = (dateString: string) => {
 };
 
 export const isStockInWatchlist = (
-  watchlist: Array<Watchlist>,
+  watchlist: Watchlist[],
   stockSymbol: String
 ) => {
   const isStockPresent = watchlist.filter(
