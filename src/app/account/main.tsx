@@ -12,7 +12,7 @@ export default function Main({ user }: { user: User }) {
     signOut();
   };
   useEffect(() => {
-    console.log(`this ran when userImage changed`);
+
   }, [userImage]);
 
   return (

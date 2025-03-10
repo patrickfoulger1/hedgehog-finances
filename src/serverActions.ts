@@ -5,6 +5,7 @@ import { hash } from "bcrypt";
 
 import { Novu } from "@novu/api";
 import { isStockInWatchlist } from "./utils/utils";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 const novu = new Novu({
@@ -102,4 +103,8 @@ export const updateWatchlist = async (userId: string, stockSymbol: string, butto
             },
         });
     }
+};
+
+export const revalidateDashboard = async () => {
+  revalidatePath("/dashboard");
 };

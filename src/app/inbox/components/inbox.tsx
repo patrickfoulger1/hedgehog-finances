@@ -1,6 +1,6 @@
 "use client";
 import { Inbox, Bell, Preferences, Notifications } from "@novu/react";
-import { WatchlistStock } from "@/lib/types";
+import { Watchlist } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { getMessaging, getToken } from "firebase/messaging";
@@ -8,7 +8,7 @@ import { setCreds } from "./setCreds";
 
 //const app = initializeApp(firebaseConfig);
 
-export function NovuInbox({ watchlist }: { watchlist: WatchlistStock[] }) {
+export function NovuInbox({ watchlist }: { watchlist: Watchlist[] }) {
     const router = useRouter();
     let tabs: { label: string; filter: { tags: string[] } }[] = [];
 

@@ -42,6 +42,9 @@ async function main() {
           },
         ],
       },
+      contactPrefs: {
+        create: [{ mobilePush: false, webPush: false, email: false, inApp: true }],
+      },
     },
   });
   const andi = await prisma.user.upsert({
@@ -59,6 +62,12 @@ async function main() {
           },
           {
             stockSymbol: "AMZN",
+          },
+          {
+            stockSymbol: "ORCL",
+          },
+          {
+            stockSymbol: "META",
           },
         ],
       },
