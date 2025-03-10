@@ -1,0 +1,44 @@
+{
+    "Pinglist": [
+        {
+            "id": "1",
+            "user": {
+                "id": "6412abcde12345f6789efghi",
+                "name": "John Pflug",
+                "email": "johnpflug@outlook.com"
+            },
+            "stockSymbols": [
+                {
+                    "symbol": "AAPL",
+                    "value": 100,
+                    "above": true
+                },
+                {
+                    "symbol": "GOOGL",
+                    "value": 500,
+                    "above": false
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "user": {
+                "id": "818128919kdadslddslsdkldsp",
+                "name": "Jack Pflug",
+                "email": "jack_pflug@hotmail.co.uk"
+            },
+            "stockSymbols": [
+                {
+                    "symbol": "GOOGL",
+                    "value": 300,
+                    "above": false
+                },
+                {
+                    "symbol": "AAPL",
+                    "value": 20,
+                    "above": true
+                }
+            ]
+        }
+    ]
+}
