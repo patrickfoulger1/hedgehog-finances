@@ -352,3 +352,26 @@ input {
     justify-content: center;
     font-size: 12px;
 }
+h2 {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 800;
+  margin: 30px 0px;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.news a {
+  margin: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.news p {
+  color: var(--muted-foreground);
+  margin-bottom: 50px;
+}
