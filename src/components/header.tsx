@@ -2,16 +2,50 @@
 import Link from "next/link";
 import MobileMenu from "./mobileMenu";
 import SearchBar from "./searchbar";
+import { appendSubscriberToken, updateSubscriberToken } from "@/serverActions";
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken } from "firebase/messaging";
+import { firebaseConfig } from "@/lib/firebase.config";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useState, useEffect, useMemo } from "react";
 import { User } from "@/lib/types";
+import { signOut } from "next-auth/react";
+import { unreadCount } from "@/serverActions";
 
 export default function Header({ user }: { user: User }) {
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState("");
+    const [unreadItems, setUnreadItems] = useState(0);
+
+    const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        signOut();
+    };
+
     useEffect(() => {
         setCurrentPage(window.location.href);
+        unreadCount(user.id).then((c) => {
+            setUnreadItems(c);
+        });
+        getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC! }).then((currentToken) => {
+            if (currentToken) {
+                appendSubscriberToken(currentToken, user.id);
+            } else {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === "granted") {
+                        updateSubscriberToken(currentToken, user.id);
+                    }
+                });
+            }
+        });
     }, []);
+
     const defaultProfilePicture = useMemo(() => (currentPage.includes("stocks") ? "../media/profile-image.png" : "media/profile-image.png"), [currentPage]);
+
     return (
         <header>
             <button
@@ -27,15 +61,42 @@ export default function Header({ user }: { user: User }) {
                 </svg>
                 {isMenuOpen ? <MobileMenu /> : null}
             </button>
-            <nav>
+            <nav className="flex">
                 <Link href="/dashboard">Dashboard</Link>
-                <Link href="/inbox">Inbox</Link>
+                <Link href="/inbox" className="flex flex-nowrap gap-2">
+                    Inbox
+                    {unreadItems ? <p className="bg-red-500 rounded-full aspect-square w-5 h-5 align-middle text-center text-sm">{unreadItems}</p> : null}
+                </Link>
             </nav>
-            <div className="search-account-area">
+            <div className="search-account-area pe-2 gap-4">
                 <SearchBar />
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="px-3 py-2 rounded-md border-1 border-white/30">
+                        <div className="fullname">{user.username}</div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>
+                            <Link href="/account">My Account</Link>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                            <Link href="/alerts">Alerts</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                            <Button
+                                className={"logoutButton"}
+                                onClick={(e) => {
+                                    handleLogout(e);
+                                }}>
+                                Logout
+                            </Button>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 <Link href="/account" className="account">
                     <img src={user.image ? user.image : defaultProfilePicture} alt="profile picture" />
-                    <div className="fullname">{user.username}</div>
                 </Link>
             </div>
         </header>
