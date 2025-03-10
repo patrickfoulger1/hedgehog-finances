@@ -52,7 +52,16 @@ export interface FailedStockFetch {
     status: string;
     reason: StockError;
 }
-
+export interface StockNewsData {
+    category: string;
+    datetime: number;
+    headline: string;
+    id: number;
+    related: string;
+    source: string;
+    summary: string;
+    url: string;
+}
 declare module "next-auth" {
     interface Session {
         user: {

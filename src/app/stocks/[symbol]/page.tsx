@@ -7,7 +7,9 @@ import { FailedStockFetch, StockData } from "@/lib/types";
 import { unstable_cache } from "next/cache";
 import DividendInfoComponent from "@/components/dividendInfoComponent";
 import getDividendInfo from "@/utils/finModelingConfig";
-
+import { getCompanyNews } from "@/utils/finnhub";
+import StockNews from './stockNews'
+import { StockNewsData } from "@/lib/types";
 export default async function StockPage({
   params,
 }: {
@@ -27,7 +29,7 @@ export default async function StockPage({
   const stockData: (StockData | FailedStockFetch)[] = await getStocksWithCache([
     symbol,
   ]);
-
+  const news: StockNewsData[] = await getCompanyNews(symbol)
   const dividendInfo = await getDividendInfo(symbol);
 
 
@@ -54,13 +56,21 @@ export default async function StockPage({
   return (
     <>
       <Header user={user}></Header>
-      <div className="sm:max-w-8/12 mx-auto border shadow-lg rounded-lg">
+      <div className="sm:max-w-8/12 mx-auto shadow-lg rounded-lg">
         <StockInfo
           stockData={stock}
           userId={user.id}
           isSymbolOnWatchlist={isSymbolOnWatchlist}
         ></StockInfo>
         <DividendInfoComponent dividendinfo={dividendInfo} />
+      </div>
+      <h2>Company news</h2>
+      <div className="news">
+        {!news.length ? <p>No news were found for this company</p> : (
+          news.map((post) => {
+            return <StockNews post={post} key={post.id} />
+          })
+        )}
       </div>
     </>
   );
