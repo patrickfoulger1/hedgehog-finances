@@ -28,9 +28,9 @@ model Watchlist {
 model ContactPreferences {
   id String   @id @default(auto()) @map("_id") @db.ObjectId
   userId      String @db.ObjectId
-  mobilePush  Boolean @default(false)
-  webPush     Boolean @default(false)
+  push        Boolean @default(false)
   email       Boolean @default(false)
   inApp       Boolean @default(true)
+  stockSymbol String
   user  User  @relation(fields: [userId], references: [id])
 }
