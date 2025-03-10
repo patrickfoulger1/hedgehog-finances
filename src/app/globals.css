@@ -247,10 +247,6 @@ button {
     cursor: pointer;
 }
 
-.nv-workflowContainer:first-child {
-    display: none;
-}
-
 .logoutButton {
     background-color: oklch(0.637 0.237 25.331);
 }

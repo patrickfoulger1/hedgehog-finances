@@ -25,8 +25,9 @@ export default async function Notifications() {
     return (
         <div className="p-5">
             <Header user={user} />
-            <NovuInbox watchlist={watchlist} />
+            <NovuInbox user={user} watchlist={watchlist} />
             <Page />
+            <p>{user.id}</p>
         </div>
     );
 }

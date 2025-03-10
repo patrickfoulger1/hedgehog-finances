@@ -4,11 +4,14 @@ import { Watchlist } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { getMessaging, getToken } from "firebase/messaging";
+import { firebaseConfig } from "@/lib/firebase.config";
+import { initializeApp } from "firebase/app";
 import { setCreds } from "./setCreds";
+import { User } from "@prisma/client";
 
-//const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export function NovuInbox({ watchlist }: { watchlist: Watchlist[] }) {
+export function NovuInbox({ user, watchlist }: { user: User; watchlist: Watchlist[] }) {
     const router = useRouter();
     let tabs: { label: string; filter: { tags: string[] } }[] = [];
 
@@ -32,7 +35,7 @@ export function NovuInbox({ watchlist }: { watchlist: Watchlist[] }) {
                 getToken(getMessaging(), {
                     vapidKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC,
                 }).then((tokenId) => {
-                    setCreds(tokenId, "4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9");
+                    setCreds(tokenId, user.id);
                 });
             }
         });
@@ -41,11 +44,11 @@ export function NovuInbox({ watchlist }: { watchlist: Watchlist[] }) {
     if ("locks" in navigator) {
         return (
             <Inbox
-                applicationIdentifier={"" + process.env.NEXT_PUBLIC_NOVU_APP_ID}
-                subscriberId="4a06f9ce-94f1-4b9d-b60f-c8b22d2810c9" // needs to come from the user session
+                applicationIdentifier={"" + process.env.NOVU_APP_ID}
+                subscriberId={user.id} // needs to come from the user session
                 routerPush={(path: string) => router.push(path)}
                 tabs={tabs}
-                preferencesFilter={{ tags: ["general", "admin", "security"] }}
+                preferencesFilter={{ tags: [] }}
                 appearance={{
                     variables: {
                         colorBackground: "#ebebeb",
