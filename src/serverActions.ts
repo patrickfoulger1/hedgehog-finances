@@ -2,10 +2,14 @@
 "use server";
 import { PrismaClient, User, Watchlist } from "@prisma/client";
 import { hash } from "bcrypt";
+import { Novu } from "@novu/api";
 import { isStockInWatchlist } from "./utils/utils";
 import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
+const novu = new Novu({
+  secretKey: `${process.env.NOVU_SECRET_KEY}`,
+});
 
 export const example = async () => {
   console.log("I would run on server");
@@ -52,6 +56,11 @@ export const handleSignup = async (formData: FormData) => {
         username,
         password: hashedPassword,
       },
+    });
+    const newSubscriber = await novu.subscribers.create({
+      firstName: newUser.username,
+      subscriberId: newUser.id,
+      email: newUser.email,
     });
 
     return { newUser };
