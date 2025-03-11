@@ -101,14 +101,18 @@ export function RegisterForm({
             <Label htmlFor="password">Password</Label>
           </div>
           <p className="text-balance text-sm text-muted-foreground">
-            Must contain at least 8 characters and at least one number or symbol
+            <ul>
+              <li>-Is at least 8 characters long</li>
+              <li>-Includes at least one special character</li>
+              <li>-Includes at least one number</li>
+            </ul>
           </p>
           <Input
             autoComplete="current-password"
             id="password"
             type="password"
             name="password"
-            pattern="^(?=.*\d)[A-Za-z\d]{8,}$"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
             required
           />
 
