@@ -1,8 +1,32 @@
+"use client";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { updateContactPrefs, getUserContactPrefs } from "@/serverActions";
 import { Switch } from "@/components/ui/switch";
+import { useState, useEffect } from "react";
 
-function PreferenceTable({ contactprefs }) {
-    console.log(contactprefs);
+function PreferenceTable({ user }) {
+    const [contactPrefsObject, setContactPrefsObject] = useState([]);
+    const [switches, setSwitches] = useState({});
+
+    const handleSwitchChange = (checked, id) => {
+        setSwitches((prev) => ({
+            ...prev,
+            [id]: checked,
+        }));
+        const checkSplit = id.split("-");
+        updateContactPrefs(user.id, checkSplit[0], checkSplit[1], checked).then((prefs) => {
+            console.log(prefs);
+        });
+        console.log(`Switch ID: ${id}, Checked: ${checked}`);
+        console.log(JSON.stringify(switches));
+    };
+
+    useEffect(() => {
+        getUserContactPrefs(user.id).then((prefs) => {
+            setContactPrefsObject(prefs);
+            console.log(prefs);
+        });
+    }, []);
 
     return (
         <div className="flex justify-center">
@@ -20,24 +44,36 @@ function PreferenceTable({ contactprefs }) {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {contactprefs.map((pref) => (
+                        {contactPrefsObject.map((pref) => (
                             <TableRow key={pref.id}>
                                 <TableCell className="font-medium">
                                     <p>{pref.stockSymbol}</p>
                                 </TableCell>
                                 <TableCell>
                                     <div className="flex items-center space-x-2">
-                                        <Switch checked={pref.push} />
+                                        <Switch
+                                            id={`${pref.stockSymbol}-push`}
+                                            checked={switches[pref.stockSymbol]}
+                                            onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-push`)}
+                                        />
                                     </div>
                                 </TableCell>
                                 <TableCell>
                                     <div className="flex items-center space-x-2">
-                                        <Switch checked={pref.email} />
+                                        <Switch
+                                            id={`${pref.stockSymbol}-email`}
+                                            checked={switches[pref.stockSymbol]}
+                                            onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-email`)}
+                                        />
                                     </div>
                                 </TableCell>
                                 <TableCell>
                                     <div className="flex items-center space-x-2">
-                                        <Switch checked={pref.inApp} />
+                                        <Switch
+                                            id={`${pref.stockSymbol}-inApp`}
+                                            checked={switches[pref.stockSymbol]}
+                                            onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-inApp`)}
+                                        />
                                     </div>
                                 </TableCell>
                             </TableRow>
