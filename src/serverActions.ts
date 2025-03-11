@@ -85,27 +85,6 @@ export const checkUserWatchlist = async (userId: string, stockSymbol: string) =>
     }
 };
 
-// not exporting function as it's only called down below in updateWatchlist
-const createContactPrefs = async (userId: string, stockSymbol: string) => {
-    const push = false;
-    const email = false;
-    const inApp = true;
-    try {
-        await prisma.contactPreferences.create({
-            data: {
-                userId,
-                stockSymbol,
-                push,
-                email,
-                inApp
-            }
-        })
-    } catch (error) {
-        console.log(`Error creating contact preferences.`);
-        throw error;
-    }
-}
-
 export const updateWatchlist = async (userId: string, stockSymbol: string, buttonState: boolean) => {
     if (buttonState) {
         // remove stock from watchlist
@@ -116,16 +95,12 @@ export const updateWatchlist = async (userId: string, stockSymbol: string, butto
             },
         });
     } else {
-        try {
-            await prisma.watchlist.create({
-                data: {
-                    userId,
-                    stockSymbol,
-                },
-            });
-            await createContactPrefs(userId, stockSymbol)
-        } catch (error) {
-        }
+        await prisma.watchlist.create({
+            data: {
+                userId,
+                stockSymbol,
+            },
+        });
     }
 };
 
