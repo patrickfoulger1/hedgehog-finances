@@ -19,7 +19,7 @@ export default function compareData(watchlistWithClose) {
             return user.userId === id;
         });
         const reducedMessages = userMessages.reduce((a, b) => {
-            return a + (b.message + ". <br/>");
+            return a + (b.message + ". ");
         }, "");
 
         messageData.push({ userId: id, messages: reducedMessages });
