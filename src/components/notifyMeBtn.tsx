@@ -45,7 +45,7 @@ export default function NotifyMeBtn({ userId, stockSymbol }) {
       {!showOptions && (
         <button
           onClick={() => setShowOptions(true)}
-          className="px-2 py-1 ml-1 bg-blue-900 text-white rounded-md cursor-pointer"
+          className="px-2 py-1 ml-4 bg-blue-900 text-white rounded-md cursor-pointer"
         >
           Set Alerts
         </button>
