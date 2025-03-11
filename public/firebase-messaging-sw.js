@@ -11,8 +11,6 @@ self.addEventListener("install", async (event) => {
                 const messaging = firebase.messaging();
 
                 messaging.onBackgroundMessage((payload) => {
-                    console.log("[Service Worker] Push received:", payload);
-
                     const notificationTitle = payload.notification.title;
                     const notificationOptions = {
                         body: payload.notification.body,
@@ -32,7 +30,16 @@ self.addEventListener("install", async (event) => {
 });
 
 self.addEventListener("push", function (event) {
-    console.log("Push event received:", event);
+    const messageData = event.data ? event.data.json() : {};
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+        clients.forEach((client) => {
+            client.postMessage({
+                type: "PUSH",
+                payload: messageData,
+            });
+        });
+    });
+
     event.waitUntil(
         self.registration.showNotification(event.notification.title, {
             body: event.notification.body,
