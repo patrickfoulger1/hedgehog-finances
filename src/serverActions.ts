@@ -126,3 +126,23 @@ export async function updateSubscriberToken(token: string, subscriberId: string)
 export async function appendSubscriberToken(token: string, subscriberId: string) {
     await novu.subscribers.credentials.append({ providerId: "fcm", credentials: { deviceTokens: [token] } }, subscriberId);
 }
+
+export async function getUserContactPrefs(userId: string) {
+    return await prisma.contactPreferences.findMany({
+        where: {
+            userId: userId,
+        },
+    });
+}
+
+export const updateContactPrefs = async (userId: string, stockSymbol: string, channel: string, state: boolean) => {
+    await prisma.contactPreferences.updateMany({
+        where: {
+            userId: userId,
+            stockSymbol: stockSymbol,
+        },
+        data: {
+            [channel]: state,
+        },
+    });
+};
