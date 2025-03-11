@@ -7,30 +7,24 @@ import Loader from "@/components/loader";
 
 function PreferenceTable({ user, prefObject }) {
     const [contactPrefsObject, setContactPrefsObject] = useState([]);
-    const [switches, setSwitches] = useState(null);
-
     const handleSwitchChange = async (checked, id) => {
-        setSwitches((prev) => ({
-            ...prev,
-            [id]: checked,
-        }));
         const checkSplit = id.split("-");
         updateContactPrefs(user.id, checkSplit[0], checkSplit[1], checked);
+        setContactPrefsObject((prevPrefs) =>
+            prevPrefs.map((pref) =>
+                pref.stockSymbol === checkSplit[0]
+                    ? { ...pref, [checkSplit[1]]: checked }
+                    : pref
+            )
+        );
     };
-
     useEffect(() => {
         getUserContactPrefs(user.id).then((prefs) => {
             setContactPrefsObject(prefs);
         });
     }, []);
-
-    useEffect(() => {
-        setSwitches(prefObject.value);
-    }, [contactPrefsObject]);
-
     return contactPrefsObject.length > 0 ? (
         <div className="flex justify-center">
-            <p>{JSON.stringify(switches)}</p>
             <div className="flex flex-col w-full justify-center max-w-[700px] gap-3">
                 <h2>Notification Preferences</h2>
                 <p>Set which notifcations you would like to receieve on the items you want to get the updates on.</p>
@@ -54,7 +48,7 @@ function PreferenceTable({ user, prefObject }) {
                                     <div className="flex items-center space-x-2">
                                         <Switch
                                             id={`${pref.stockSymbol}-push`}
-                                            checked={switches[pref.stockSymbol]}
+                                            checked={pref.push}
                                             onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-push`)}
                                         />
                                     </div>
@@ -63,7 +57,7 @@ function PreferenceTable({ user, prefObject }) {
                                     <div className="flex items-center space-x-2">
                                         <Switch
                                             id={`${pref.stockSymbol}-email`}
-                                            checked={switches[pref.stockSymbol]}
+                                            checked={pref.email}
                                             onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-email`)}
                                         />
                                     </div>
@@ -72,7 +66,7 @@ function PreferenceTable({ user, prefObject }) {
                                     <div className="flex items-center space-x-2">
                                         <Switch
                                             id={`${pref.stockSymbol}-inApp`}
-                                            checked={switches[pref.stockSymbol]}
+                                            checked={pref.inApp}
                                             onCheckedChange={(checked) => handleSwitchChange(checked, `${pref.stockSymbol}-inApp`)}
                                         />
                                     </div>

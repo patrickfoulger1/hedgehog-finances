@@ -34,7 +34,6 @@ export default async function Notifications() {
   return (
     <div className="p-5">
       <Header user={user} />
-      <p>{user.id}</p>
       <IosInstall />
       <PreferenceTable user={user} prefObject={prefObject} />
     </div>
