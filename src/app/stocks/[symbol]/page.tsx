@@ -8,7 +8,7 @@ import { unstable_cache } from "next/cache";
 import DividendInfoComponent from "@/components/dividendInfoComponent";
 import getDividendInfo from "@/utils/finModelingConfig";
 import { getCompanyNews } from "@/utils/finnhub";
-import StockNews from './stockNews'
+import NewsList from "./newsList";
 import { StockNewsData } from "@/lib/types";
 export default async function StockPage({
   params,
@@ -56,7 +56,7 @@ export default async function StockPage({
   return (
     <>
       <Header user={user}></Header>
-      <div className="sm:max-w-8/12 mx-auto shadow-lg rounded-lg">
+      <div className="sm:max-w-8/12 mx-auto shadow-lg rounded-lg pb-4">
         <StockInfo
           stockData={stock}
           userId={user.id}
@@ -64,14 +64,8 @@ export default async function StockPage({
         ></StockInfo>
         <DividendInfoComponent dividendinfo={dividendInfo} />
       </div>
-      <h2>Company news</h2>
-      <div className="news">
-        {!news.length ? <p>No news were found for this company</p> : (
-          news.map((post) => {
-            return <StockNews post={post} key={post.id} />
-          })
-        )}
-      </div>
+      <h2 id="newsStart">Company news</h2>
+      {!news.length ? <p>No news were found for this company</p> : <NewsList news={JSON.parse(JSON.stringify(news))} />}
     </>
   );
 }
