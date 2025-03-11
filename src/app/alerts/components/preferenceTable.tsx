@@ -3,33 +3,34 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import { updateContactPrefs, getUserContactPrefs } from "@/serverActions";
 import { Switch } from "@/components/ui/switch";
 import { useState, useEffect } from "react";
+import Loader from "@/components/loader";
 
-function PreferenceTable({ user }) {
+function PreferenceTable({ user, prefObject }) {
     const [contactPrefsObject, setContactPrefsObject] = useState([]);
-    const [switches, setSwitches] = useState({});
+    const [switches, setSwitches] = useState(null);
 
-    const handleSwitchChange = (checked, id) => {
+    const handleSwitchChange = async (checked, id) => {
         setSwitches((prev) => ({
             ...prev,
             [id]: checked,
         }));
         const checkSplit = id.split("-");
-        updateContactPrefs(user.id, checkSplit[0], checkSplit[1], checked).then((prefs) => {
-            console.log(prefs);
-        });
-        console.log(`Switch ID: ${id}, Checked: ${checked}`);
-        console.log(JSON.stringify(switches));
+        updateContactPrefs(user.id, checkSplit[0], checkSplit[1], checked);
     };
 
     useEffect(() => {
         getUserContactPrefs(user.id).then((prefs) => {
             setContactPrefsObject(prefs);
-            console.log(prefs);
         });
     }, []);
 
-    return (
+    useEffect(() => {
+        setSwitches(prefObject.value);
+    }, [contactPrefsObject]);
+
+    return contactPrefsObject.length > 0 ? (
         <div className="flex justify-center">
+            <p>{JSON.stringify(switches)}</p>
             <div className="flex flex-col w-full justify-center max-w-[700px] gap-3">
                 <h2>Notification Preferences</h2>
                 <p>Set which notifcations you would like to receieve on the items you want to get the updates on.</p>
@@ -83,6 +84,8 @@ function PreferenceTable({ user }) {
                 </Table>
             </div>
         </div>
+    ) : (
+        <Loader />
     );
 }
 
