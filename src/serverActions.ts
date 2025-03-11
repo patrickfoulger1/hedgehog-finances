@@ -73,7 +73,7 @@ export const updateProfileImage = async (url: string, user: User) => {
 };
 
 // it returns true if stockSymbol is present in watchlist
-export const checkUserWatchlist = async (userId, stockSymbol) => {
+export const checkUserWatchlist = async (userId: string, stockSymbol: string) => {
     const watchlist = (await prisma.watchlist.findMany({
         where: { userId },
     })) as Watchlist[];

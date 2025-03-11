@@ -4,6 +4,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 import {
   checkUserWatchlist,
   revalidateDashboard,
+  updateContactPrefs,
   updateWatchlist,
 } from "@/serverActions";
 import { useEffect, useState } from "react";
