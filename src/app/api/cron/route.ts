@@ -1,13 +1,9 @@
 "use server";
 
 import getWatchlist from "./getWatchlist";
-import processPingData from "./prcessPingData";
 import addCloseData from "./addCloseData";
 import compareData from "./compareData";
 import { getStocks } from "../../../utils/frontendApiConfig";
-import { triggerWorkflow } from "@/serverActions";
-import { symbol } from "zod";
-import { watch } from "fs";
 import mailerFunction from "./mailerFunction";
 
 export async function GET() {
