@@ -12,7 +12,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const isAuthenticated = request.cookies.has("next-auth.session-token");
+  const isAuthenticated =
+    request.cookies.has("next-auth.session-token") ||
+    request.cookies.has("__Secure-next-auth.session-token");
   const publicPaths = ["/", "/login", "/register"];
   const protectedPaths = ["/dashboard", "/account", "/inbox"];
   const path = request.nextUrl.pathname;
