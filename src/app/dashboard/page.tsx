@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
-import { User, Watchlist } from "@prisma/client";
+import { User, Watchlist } from "@/lib/types";
 import Charts from "./charts";
 
 export default async function DashboardPage() {
