@@ -9,34 +9,34 @@ import IosInstall from "./components/iOSInstall";
 import PreferenceTable from "./components/preferenceTable";
 
 export default async function Notifications() {
-    const session = (await getServerSession(authOptions)) as Session;
+  const session = (await getServerSession(authOptions)) as Session;
 
-    const user = (await prisma.user.findUnique({
-        where: {
-            email: session.user.email,
-        },
-    })) as User;
+  const user = (await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  })) as User;
 
-    const prefObject = getUserContactPrefs(user.id).then((prefs) => {
-        const finalObj = {};
-        prefs.forEach((pref) => {
-            for (const [key, value] of Object.entries(pref)) {
-                const concatKey = [pref.stockSymbol, key].join("-");
-                if (["push", "email", "inApp"].includes(key)) {
-                    finalObj[concatKey] = value;
-                }
-            }
-        });
-
-        return finalObj;
+  const prefObject = getUserContactPrefs(user.id).then((prefs) => {
+    const finalObj = {};
+    prefs.forEach((pref) => {
+      for (const [key, value] of Object.entries(pref)) {
+        const concatKey = [pref.stockSymbol, key].join("-");
+        if (["push", "email", "inApp"].includes(key)) {
+          finalObj[concatKey] = value;
+        }
+      }
     });
 
-    return (
-        <div className="p-5">
-            <Header user={user} />
-            <p>{user.id}</p>
-            <IosInstall />
-            <PreferenceTable user={user} prefObject={prefObject} />
-        </div>
-    );
+    return finalObj;
+  });
+
+  return (
+    <div className="p-5">
+      <Header user={user} />
+      <p>{user.id}</p>
+      <IosInstall />
+      <PreferenceTable user={user} prefObject={prefObject} />
+    </div>
+  );
 }

@@ -3,8 +3,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
-import { User, Watchlist } from "@/lib/types";
+
 import Charts from "./charts";
+import { User, Watchlist } from ".prisma/client";
 
 export default async function DashboardPage() {
   const session = (await getServerSession(authOptions)) as Session;
