@@ -16,24 +16,12 @@ export default async function Notifications() {
         },
     })) as User;
 
-    const watchlist = (await prisma.watchlist.findMany({
-        where: {
-            userId: user?.id,
-        },
-    })) as Watchlist[];
-
-    const contactPreferences = (await prisma.contactPreferences.findMany({
-        where: {
-            userId: user?.id,
-        },
-    })) as ContactPreferences[];
-
     return (
         <div className="p-5">
             <Header user={user} />
             <p>{user.id}</p>
             <IosInstall />
-            <PreferenceTable contactprefs={contactPreferences} />
+            <PreferenceTable user={user} />
         </div>
     );
 }
