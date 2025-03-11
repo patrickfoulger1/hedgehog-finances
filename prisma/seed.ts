@@ -22,6 +22,12 @@ async function main() {
                     },
                 ],
             },
+            contactPrefs: {
+                create: [
+                    { stockSymbol: "AAPL", push: false, email: false, inApp: true },
+                    { stockSymbol: "NVDA", push: false, email: false, inApp: true },
+                ],
+            },
         },
     });
     const drew = await prisma.user.upsert({
@@ -75,11 +81,39 @@ async function main() {
                     },
                 ],
             },
+            contactPrefs: {
+                create: [
+                    { stockSymbol: "ORCL", push: false, email: false, inApp: true },
+                    { stockSymbol: "META", push: false, email: false, inApp: true },
+                    { stockSymbol: "AAPL", push: false, email: false, inApp: true },
+                    { stockSymbol: "AMZN", push: false, email: false, inApp: true },
+                ],
+            },
         },
     });
+
+    const john = await prisma.user.upsert({
+        where: { email: "johnpflug@outlook.com" },
+        update: {},
+        create: {
+            id: "67cbc6fc0d9b14f6f10648bb",
+            email: "johnpflug@outlook.com",
+            username: "John Pflug",
+            password,
+            watchlist: { create: [{ stockSymbol: "AAPL" }, { stockSymbol: "META" }] },
+            contactPrefs: {
+                create: [
+                    { stockSymbol: "META", push: false, email: false, inApp: true },
+                    { stockSymbol: "AAPL", push: false, email: false, inApp: true },
+                ],
+            },
+        },
+    });
+
     console.log(patrick, " added to db");
     console.log(drew, " added to db");
     console.log(andi, " added to db");
+    console.log(john, " added to db");
 }
 main()
     .then(async () => {
