@@ -171,14 +171,3 @@ export const updateContactPrefs = async (userId: string, stockSymbol: string, ch
         },
     });
 };
-
-export const triggerWorkflow = async (subscriberId: string, title: string, body: string, stock: string, workflowId: string) => {
-    await novu
-        .trigger({ workflowId: workflowId, payload: { title: title, body: body, stock: stock }, to: { subscriberId: subscriberId } })
-        .then((results) => {
-            return { result: "success" };
-        })
-        .catch((err) => {
-            return { result: "failed", detail: err };
-        });
-};
