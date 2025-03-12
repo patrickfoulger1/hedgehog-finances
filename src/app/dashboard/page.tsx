@@ -1,7 +1,4 @@
 import Header from "@/components/header";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/authOptions";
-import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
 
 import Charts from "./charts";
