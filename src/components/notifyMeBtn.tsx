@@ -14,6 +14,14 @@ export default function NotifyMeBtn({ userId, stockSymbol }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isError, setIsError] = useState(false)
 
+
+  if (showOptions) {
+    window.addEventListener('click', (e) => {
+      if (e.target.localName !== "button" || e.target.nodeName !== "BUTTON") { setShowOptions(false) }
+    })
+  }
+
+
   const toggleSelection = (type: keyof typeof selections) => {
     setSelections((prev) => ({ ...prev, [type]: !prev[type] }));
   };
