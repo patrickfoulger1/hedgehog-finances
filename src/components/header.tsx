@@ -148,11 +148,15 @@ export default function Header({ user }: { user: User }) {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="headerDropdown">
                             <DropdownMenuItem>
+
+
+
                                 <Link className="accountNav" href="/account">My Account</Link>
+
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <Link className="accountNav" href="/alerts">Alerts</Link>
+                                <Link className="accountNav" href="/alerts">Stock Alerts</Link>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="flex justify-center">
