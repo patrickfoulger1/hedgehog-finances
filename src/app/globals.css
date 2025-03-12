@@ -182,22 +182,23 @@ nav a {
     vertical-align: baseline;
 }
 
-.menu-controller {
-    margin: 10px;
-    display: none;
-    border-radius: 10px;
-    height: 50px;
-    width: 50px;
-    min-height: 50px;
-    min-width: 50px;
-    border: 1px solid var(--ring);
-    color: var(--primary);
-    align-items: center;
-    justify-content: center;
-    outline: none;
-    background: none;
-    cursor: pointer;
-    position: relative;
+
+#radix-«r4» {
+  margin: 10px;
+  display: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid var(--ring);
+  color: var(--primary);
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
 }
 
 .dropdown {
@@ -285,9 +286,15 @@ button {
         display: none;
     }
 
-    .menu-controller {
-        display: flex;
-    }
+  .account .fullname,
+  nav {
+    display: none;
+  }
+
+  #radix-«r4» {
+    display: flex;
+  }
+
 }
 
 .clip-triangle {
@@ -479,5 +486,14 @@ h2 {
 }
 
 .novu-css-szlbgulx {
-    border-radius: unset !important;
+
+  border-radius: unset !important;
 }
+
+.accountNav:hover {
+  color: var(--card-foreground) !important;
+}
+.headerDropdown {
+  border: 1px solid var(--ring);
+}
+
