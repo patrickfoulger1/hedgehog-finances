@@ -24,7 +24,6 @@ export default async function Notifications() {
     return (
         <div className="p-5">
             <Header user={user} />
-            <p>{user.id}</p>
             <NovuInbox user={user} watchlist={watchlist} />
         </div>
     );
