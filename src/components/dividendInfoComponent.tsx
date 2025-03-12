@@ -7,7 +7,7 @@ export default function DividendInfoComponent({
 }) {
   if (dividendinfo?.length > 0) {
     return (
-      <div className="border rounded-2xl shadow-lg  px-6 pb-2 w-fit mx-auto my-4 text-center">
+      <div className="border rounded-2xl shadow-lg  px-6 pb-7 w-fit mx-auto my-4 text-center">
         <h2>
           <b>{dividendinfo[0]?.symbol}</b>
         </h2>
