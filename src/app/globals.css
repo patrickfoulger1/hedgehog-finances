@@ -281,6 +281,7 @@ nav a {
 }
 
 @media only screen and (max-width: 880px) {
+
   .account .fullname,
   nav {
     display: none;
@@ -292,17 +293,15 @@ nav a {
 }
 
 .clip-triangle {
-  clip-path: polygon(
-    89% 67%,
-    76% 57%,
-    57% 84%,
-    45% 71%,
-    26% 95%,
-    14% 88%,
-    0 100%,
-    100% 100%,
-    100% 48%
-  );
+  clip-path: polygon(89% 67%,
+      76% 57%,
+      57% 84%,
+      45% 71%,
+      26% 95%,
+      14% 88%,
+      0 100%,
+      100% 100%,
+      100% 48%);
 }
 
 @media only screen and (max-width: 600px) {
@@ -331,6 +330,26 @@ nav a {
   margin: 0px 10px;
   width: 300px;
 }
+
+/* For small phones (up to 375px, iPhone SE, iPhone 6/7/8) */
+@media (max-width: 375px) {
+  .searchBarArea {
+    width: 90%;
+    max-width: 250px;
+  }
+
+  .searchBarArea input {
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 475px) {
+  .searchBarArea {
+    width: 95%;
+    max-width: 280px;
+  }
+}
+
 
 .searchResults {
   position: absolute;
@@ -368,6 +387,7 @@ input {
   justify-content: center;
   font-size: 12px;
 }
+
 h2 {
   text-align: center;
   font-size: 25px;
