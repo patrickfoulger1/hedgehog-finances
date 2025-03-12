@@ -122,11 +122,14 @@ Once users have created an account and are signed in, they can take advantage of
    - **Set Alerts**: If a company is added to a user's watchlist, they can click the 'Set Alerts' button located beside the company's stock symbol. This allows the user to customize their notification preferences for that stock. Notifications can be received via In-App Alerts, Email Notifications, and/or Push Notifications. Users can select one or more of these options based on their preferences.
    ![Article Page](src/assets/screenshots/set_alerts.png)
 
-   - **Notification Preferences**: Clicking the profile picture, then selecting 'Alerts' from the drop-down menu redirects users to their Notification Preferences page, where they can conveniently view and set which notifications they would like to receive for each company in their watchlist.
+   - **Notification Preferences**: Clicking the profile picture, then selecting 'Stock Alerts' from the drop-down menu redirects users to their Notification Preferences page, where they can conveniently view and set which notifications they would like to receive for each company in their watchlist.
    ![Article Page](src/assets/screenshots/notification_preferences.png)
 
    - **Inbox**: Selecting 'Inbox' from the top left corner of the page directs users to their inbox, where they can conveniently view all notifications related to their watchlisted stock symbols.
    ![Article Page](src/assets/screenshots/inbox.png)
+  
+   - **Account Page**: Clicking the profile picture, then selecting 'My Account' from the drop-down menu redirects users to their Account page. Here, the user can change their profile picture and/or sign out.
+   ![Article Page](src/assets/screenshots/account_page.png)
 
 
 ## Deployed Application
