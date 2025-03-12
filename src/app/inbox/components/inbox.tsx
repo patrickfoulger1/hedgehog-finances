@@ -1,8 +1,6 @@
 "use client";
 import { Inbox, Notifications } from "@novu/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
 import { User, Watchlist } from "@prisma/client";
 
 export function NovuInbox({ user, watchlist }: { user: User; watchlist: Watchlist[] }) {
