@@ -17,7 +17,8 @@ export default function NotifyMeBtn({ userId, stockSymbol }) {
 
   if (showOptions) {
     window.addEventListener('click', (e) => {
-      if (e.target.localName !== "button" || e.target.nodeName !== "BUTTON") { setShowOptions(false) }
+      const target = e.target as HTMLElement;
+      if (target.localName !== "button" || target.nodeName !== "BUTTON") { setShowOptions(false) }
     })
   }
 
