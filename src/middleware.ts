@@ -16,14 +16,16 @@ export function middleware(request: NextRequest) {
     request.cookies.has("next-auth.session-token") ||
     request.cookies.has("__Secure-next-auth.session-token");
   const publicPaths = ["/", "/login", "/register"];
-  const protectedPaths = ["/dashboard", "/account", "/inbox", "/alerts"];
+  const protectedPaths = ["dashboard", "account", "inbox", "alerts", "stocks"];
   const path = request.nextUrl.pathname;
+
+  const protectedRoots = request.nextUrl.pathname.split("/");
 
   if (isAuthenticated && publicPaths.includes(path)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (!isAuthenticated && protectedPaths.includes(path)) {
+  if (!isAuthenticated && protectedPaths.includes(protectedRoots[1])) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
