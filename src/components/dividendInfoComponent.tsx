@@ -33,9 +33,7 @@ export default function DividendInfoComponent({
     );
   } else {
     return (
-      <div className="border rounded-2xl shadow-lg py-4 px-6 w-fit mx-auto mt-2 text-center">
-        This company does not currently pay out dividends.
-      </div>
+      null
     );
   }
 }
