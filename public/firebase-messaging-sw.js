@@ -20,40 +20,35 @@ self.addEventListener("install", async (event) => {
                     self.registration.showNotification(notificationTitle, notificationOptions);
                 });
 
-                onMessage(messaging, (payload) => {
-                    console.log("Message received. ", payload);
-                    // ...
+                self.addEventListener("push", function (event) {
+                    const messageData = event.data ? event.data.json() : {};
+                    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+                        clients.forEach((client) => {
+                            client.postMessage({
+                                type: "PUSH",
+                                payload: messageData,
+                            });
+                        });
+                    });
+
+                    event.waitUntil(
+                        self.registration.showNotification(event.notification.title, {
+                            body: event.notification.body,
+                            icon: "/icon.png",
+                        })
+                    );
+                });
+
+                self.addEventListener("pushsubscriptionchange", function (event) {
+                    console.log("Push subscription change event:", event);
+                });
+
+                self.addEventListener("notificationclick", function (event) {
+                    console.log("Notification click received.");
+                    event.notification.close();
+                    event.waitUntil(clients.openWindow("https://hedgehog-finances-nine.vercel.app/"));
                 });
             })
-            .catch((error) => console.error("[Service Worker] Failed to load Firebase config:", error))
+            .catch((error) => console.error("[Service Worker] Failed to load config:", error))
     );
-});
-
-self.addEventListener("push", function (event) {
-    const messageData = event.data ? event.data.json() : {};
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
-        clients.forEach((client) => {
-            client.postMessage({
-                type: "PUSH",
-                payload: messageData,
-            });
-        });
-    });
-
-    event.waitUntil(
-        self.registration.showNotification(event.notification.title, {
-            body: event.notification.body,
-            icon: "/icon.png",
-        })
-    );
-});
-
-self.addEventListener("pushsubscriptionchange", function (event) {
-    console.log("Push subscription change event:", event);
-});
-
-self.addEventListener("notificationclick", function (event) {
-    console.log("Notification click received.");
-    event.notification.close();
-    event.waitUntil(clients.openWindow("<https://your-website.com>"));
 });
