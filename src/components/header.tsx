@@ -144,7 +144,7 @@ export default function Header({ user }: { user: User }) {
       <Toaster theme="system" />
       <header>
         <DropdownMenu>
-          <DropdownMenuTrigger className="h-15 w-15 cursor-pointer select-none">
+          <DropdownMenuTrigger className="navDropDown h-15 w-15 cursor-pointer select-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
