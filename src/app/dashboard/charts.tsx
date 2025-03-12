@@ -1,7 +1,7 @@
 import { FailedStockFetch, StockData } from "@/lib/types";
 import { unstable_cache } from "next/cache";
 import { getStocks } from "../../utils/frontendApiConfig";
-
+import { EmptyWatchlist } from "@/components/emptyWatchlist";
 import { LineChart } from "@/components/lineChart";
 import Link from "next/link";
 import { Watchlist } from "@prisma/client";
@@ -45,7 +45,7 @@ export default async function Charts({ stocks }: { stocks: Watchlist[] }) {
   } else {
     watchlistDisplay = (
       <div className="no-content">
-        <p>No stocks added to the watchlist</p>
+        <EmptyWatchlist />
       </div>
     );
   }
