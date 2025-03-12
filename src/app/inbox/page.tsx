@@ -1,7 +1,6 @@
 import Header from "@/components/header";
 import { User, Watchlist } from "@prisma/client";
 import { NovuInbox } from "./components/inbox";
-
 import { prisma } from "@/lib/db";
 import getSessionUser from "@/utils/getSessionUser";
 
