@@ -5,14 +5,10 @@ import { authOptions } from "@/utils/authOptions";
 import { Session } from "next-auth";
 import { prisma } from "@/lib/db";
 import { User } from "@prisma/client";
+import getSessionUser from "@/utils/getSessionUser";
 
 export default async function AccountPage() {
-  const session = (await getServerSession(authOptions)) as Session;
-  const user = (await prisma.user.findUnique({
-    where: {
-      email: session?.user?.email,
-    },
-  })) as User;
+  const user = (await getSessionUser()) as User;
 
   return (
     <>
