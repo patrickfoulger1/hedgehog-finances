@@ -280,6 +280,7 @@ button {
 }
 
 @media only screen and (max-width: 880px) {
+
   .account .fullname,
   nav {
     display: none;
@@ -296,17 +297,15 @@ button {
 }
 
 .clip-triangle {
-  clip-path: polygon(
-    89% 67%,
-    76% 57%,
-    57% 84%,
-    45% 71%,
-    26% 95%,
-    14% 88%,
-    0 100%,
-    100% 100%,
-    100% 48%
-  );
+  clip-path: polygon(89% 67%,
+      76% 57%,
+      57% 84%,
+      45% 71%,
+      26% 95%,
+      14% 88%,
+      0 100%,
+      100% 100%,
+      100% 48%);
 }
 
 @media only screen and (max-width: 600px) {
@@ -500,6 +499,28 @@ h2 {
 .accountNav:hover {
   color: var(--card-foreground) !important;
 }
+
 .headerDropdown {
   border: 1px solid var(--ring);
+}
+
+.news a {
+  transition: all 0.5s;
+  border-radius: 15px;
+  border: 1px solid transparent;
+}
+
+.charts .bg-card {
+  transition: all 0.5s;
+  border-radius: 15px;
+}
+
+.dark .news a:hover,
+.dark .charts .bg-card:hover {
+  border: 1px solid #FFF;
+}
+
+.news a:hover,
+.charts .bg-card:hover {
+  border: 1px solid #000;
 }
