@@ -519,6 +519,7 @@ h2 {
 .accountNav:hover {
   color: var(--card-foreground) !important;
 }
+
 .headerDropdown {
   border: 1px solid var(--ring);
 }
@@ -597,4 +598,24 @@ h2 {
 
 .novu-css-szlbgulx {
   border-radius: unset !important;
+}
+.news a {
+  transition: all 0.5s;
+  border-radius: 15px;
+  border: 1px solid transparent;
+}
+
+.charts .bg-card {
+  transition: all 0.5s;
+  border-radius: 15px;
+}
+
+.dark .news a:hover,
+.dark .charts .bg-card:hover {
+  border: 1px solid #fff;
+}
+
+.news a:hover,
+.charts .bg-card:hover {
+  border: 1px solid #000;
 }
