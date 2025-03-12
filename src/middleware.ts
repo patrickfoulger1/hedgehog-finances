@@ -2,7 +2,19 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const isAuthenticated = request.cookies.has("next-auth.session-token");
+  // Skip middleware for static files and API routes
+  const { pathname } = request.nextUrl;
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".") // This catches files like manifest.webmanifest, favicon.ico, etc.
+  ) {
+    return NextResponse.next();
+  }
+
+  const isAuthenticated =
+    request.cookies.has("next-auth.session-token") ||
+    request.cookies.has("__Secure-next-auth.session-token");
   const publicPaths = ["/", "/login", "/register"];
   const protectedPaths = ["/dashboard", "/account", "/inbox"];
   const path = request.nextUrl.pathname;
