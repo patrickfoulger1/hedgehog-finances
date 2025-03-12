@@ -141,29 +141,34 @@ export default function Header({ user }: { user: User }) {
 
   return (
     <>
-      <Toaster />
+      <Toaster theme="system" />
       <header>
-        <button
-          className="menu-controller"
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-            />
-          </svg>
-          {isMenuOpen ? <MobileMenu /> : null}
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="navDropDown h-15 w-15 cursor-pointer select-none">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="headerDropdown">
+            <DropdownMenuItem>
+              <Link href="/dashboard">Dashboard</Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link href="/inbox">Inbox</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <nav className="flex">
           <Link href="/dashboard">Dashboard</Link>
           <Link href="/inbox" className="flex flex-nowrap gap-2">
@@ -174,7 +179,10 @@ export default function Header({ user }: { user: User }) {
               </p>
             ) : null}
           </Link>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
           {!canNotify ? (
             <span className="" onClick={requestPermission}>
               <TooltipProvider>
@@ -226,7 +234,6 @@ export default function Header({ user }: { user: User }) {
         </nav>
         <div className="search-account-area pe-2 gap-4">
           <SearchBar />
-
           <DropdownMenu>
             <DropdownMenuTrigger className="h-15 w-15 cursor-pointer select-none">
               <img
@@ -234,16 +241,20 @@ export default function Header({ user }: { user: User }) {
                 alt="profile picture"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>
-                <Link href="/account">My Account</Link>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
+            <DropdownMenuContent className="headerDropdown">
               <DropdownMenuItem>
-                <Link href="/alerts">Alerts</Link>
+                <Link className="accountNav" href="/account">
+                  My Account
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
+                <Link className="accountNav" href="/alerts">
+                  Stock Alerts
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="flex justify-center">
                 <Button
                   className={"logoutButton"}
                   onClick={(e) => {

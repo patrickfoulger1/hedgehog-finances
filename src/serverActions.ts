@@ -139,7 +139,6 @@ export const unreadCount = async (subscriberId) => {
             subscriberId: subscriberId,
         })
         .then((r) => {
-            console.log("unread:", r.result.count);
             return r.result.count;
         });
 };
