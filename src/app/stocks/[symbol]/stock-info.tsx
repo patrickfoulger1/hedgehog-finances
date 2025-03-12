@@ -9,7 +9,7 @@ export default function StockInfo({ stockData, userId, isSymbolOnWatchlist }) {
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-center items-center">
         <h1 className="">{stockData.meta.symbol}</h1>
         <AddToWatchlistBtn userId={userId} stockSymbol={stockData.meta.symbol} isSymbolOnWatchlist={isSymbolOnWatchlist} />
         <NotifyMeBtn userId={userId} stockSymbol={stockData.meta.symbol} />
