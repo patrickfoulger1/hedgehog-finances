@@ -1,7 +1,7 @@
 "use client"
 
 import { updateContactPrefs } from "@/serverActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NotifyMeBtn({ userId, stockSymbol }) {
   const [selections, setSelections] = useState({
@@ -13,6 +13,21 @@ export default function NotifyMeBtn({ userId, stockSymbol }) {
   const [showOptions, setShowOptions] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isError, setIsError] = useState(false)
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.localName !== "button" || target.nodeName !== "BUTTON") { setShowOptions(false) }
+    }
+    if (showOptions) {
+      window.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside)
+    }
+
+  }, [showOptions])
 
   const toggleSelection = (type: keyof typeof selections) => {
     setSelections((prev) => ({ ...prev, [type]: !prev[type] }));
@@ -45,7 +60,7 @@ export default function NotifyMeBtn({ userId, stockSymbol }) {
       {!showOptions && (
         <button
           onClick={() => setShowOptions(true)}
-          className="px-2 py-1 ml-1 bg-blue-900 text-white rounded-md cursor-pointer"
+          className="px-2 py-1 ml-4 bg-blue-900 text-white rounded-md cursor-pointer"
         >
           Set Alerts
         </button>
