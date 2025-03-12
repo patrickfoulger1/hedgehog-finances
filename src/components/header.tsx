@@ -147,7 +147,7 @@ export default function Header({ user }: { user: User }) {
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <Link href="/alerts">Alerts</Link>
+                                <Link href="/alerts">Stock Alerts</Link>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
