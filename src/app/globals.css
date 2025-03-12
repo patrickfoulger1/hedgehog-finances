@@ -182,7 +182,7 @@ nav a {
   vertical-align: baseline;
 }
 
-.menu-controller {
+#radix-«r4» {
   margin: 10px;
   display: none;
   border-radius: 10px;
@@ -286,7 +286,7 @@ button {
     display: none;
   }
 
-  .menu-controller {
+  #radix-«r4» {
     display: flex;
   }
 }
@@ -485,4 +485,11 @@ h2 {
 
 .novu-css-szlbgulx {
   border-radius: unset !important;
+}
+
+.accountNav:hover {
+  color: var(--card-foreground) !important;
+}
+.headerDropdown {
+  border: 1px solid var(--ring);
 }
