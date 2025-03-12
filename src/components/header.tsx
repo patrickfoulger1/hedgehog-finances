@@ -179,10 +179,6 @@ export default function Header({ user }: { user: User }) {
               </p>
             ) : null}
           </Link>
-<<<<<<< HEAD
-
-=======
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
           {!canNotify ? (
             <span className="" onClick={requestPermission}>
               <TooltipProvider>

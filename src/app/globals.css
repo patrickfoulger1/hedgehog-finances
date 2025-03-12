@@ -182,11 +182,7 @@ nav a {
   vertical-align: baseline;
 }
 
-<<<<<<< HEAD
-.menu-controller {
-=======
 .navDropDown {
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
   margin: 10px;
   display: none;
   border-radius: 10px;
@@ -284,40 +280,22 @@ button {
 }
 
 @media only screen and (max-width: 880px) {
-<<<<<<< HEAD
-=======
   .account .fullname,
   nav {
     display: none;
   }
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
 
   .account .fullname,
   nav {
     display: none;
   }
 
-<<<<<<< HEAD
-  .menu-controller {
-=======
   .navDropDown {
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
     display: flex;
   }
 }
 
 .clip-triangle {
-<<<<<<< HEAD
-  clip-path: polygon(89% 67%,
-      76% 57%,
-      57% 84%,
-      45% 71%,
-      26% 95%,
-      14% 88%,
-      0 100%,
-      100% 100%,
-      100% 48%);
-=======
   clip-path: polygon(
     89% 67%,
     76% 57%,
@@ -329,7 +307,6 @@ button {
     100% 100%,
     100% 48%
   );
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
 }
 
 @media only screen and (max-width: 600px) {
@@ -357,8 +334,6 @@ button {
   position: relative;
   margin: 0px 10px;
   width: 300px;
-<<<<<<< HEAD
-=======
 }
 
 /* For small phones (up to 375px, iPhone SE, iPhone 6/7/8) */
@@ -378,7 +353,6 @@ button {
     width: 95%;
     max-width: 280px;
   }
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
 }
 
 /* For small phones (up to 375px, iPhone SE, iPhone 6/7/8) */
@@ -389,7 +363,7 @@ button {
   }
 
   .searchBarArea input {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -399,7 +373,6 @@ button {
     max-width: 280px;
   }
 }
-
 
 .searchResults {
   position: absolute;
@@ -460,8 +433,6 @@ h2 {
 .news p {
   color: var(--muted-foreground);
   margin-bottom: 50px;
-<<<<<<< HEAD
-=======
 }
 
 #searchStocks {
@@ -550,7 +521,6 @@ h2 {
 }
 .headerDropdown {
   border: 1px solid var(--ring);
->>>>>>> 66ba5061e5fd78e53789817b139e492fafd7b632
 }
 
 .novu-container {
@@ -583,7 +553,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.data-\[state\=active\]\:nt-text-foreground[data-state=active],
+.data-\[state\=active\]\:nt-text-foreground[data-state="active"],
 .nv-tabsList button {
   color: var(--card-foreground);
 }
@@ -622,7 +592,7 @@ h2 {
 .nv-moreActions__dropdownContent svg,
 .nv-inboxStatus__dropdownContent,
 .nv-inboxStatus__dropdownContent svg {
-  color: var(--muted-foreground)
+  color: var(--muted-foreground);
 }
 
 .novu-css-szlbgulx {
