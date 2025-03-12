@@ -15,15 +15,17 @@ export default function AddToWatchlistBtn({
   isSymbolOnWatchlist,
 }) {
   const [buttonState, setButtonState] = useState(isSymbolOnWatchlist);
+  const [isAddingToWatchlist, setIsAddingToWatchlist] = useState(false)
 
   const handleClick = async () => {
+    setIsAddingToWatchlist(true)
     try {
       await updateWatchlist(userId, stockSymbol, buttonState);
-      console.log(`watchlist updated`);
+      setIsAddingToWatchlist(false)
       setButtonState((prev) => !prev);
       revalidateDashboard();
     } catch (error) {
-      console.log(error);
+      setIsAddingToWatchlist(false)
     }
   };
   return (
@@ -31,6 +33,7 @@ export default function AddToWatchlistBtn({
       className={!buttonState ? `` : `logoutButton`}
       onClick={handleClick}
       size="sm"
+      disabled={isAddingToWatchlist}
     >
       {!buttonState ? `Add to Watchlist` : `Remove`}
     </Button>
