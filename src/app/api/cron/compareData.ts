@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/db";
-import { triggerWorkflow } from "@/serverActions";
+
+const getDate = (createdAt) => {
+    return new Date(createdAt).toUTCString().slice(0, 22);
+};
 
 export default async function compareData(watchlistWithClose) {
     // Initialise an empty array that will cotnain all email message data:
@@ -9,7 +12,7 @@ export default async function compareData(watchlistWithClose) {
     watchlistWithClose.forEach((entry) => {
         // Start each message:
         // let message = `Here is an update on your stock watchlist:\n\n`;
-        let message = `${entry.stockSymbol} is now at: ${entry.close} ${entry.currency}`;
+        let message = `${getDate(Date.now())}: ${entry.stockSymbol} is now at: ${entry.close} ${entry.currency}`;
         entry.message = message;
 
         contactPref.forEach((pref) => {
