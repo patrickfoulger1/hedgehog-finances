@@ -40,6 +40,7 @@ Designed for modern investors, Hedgehog Finances empowers users to stay informed
 
 -   [Twelve Data](https://twelvedata.com/) REST API for access to financial data.
 -   [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs/stable#dividends-company) Dividends Company API.
+-   [Finnhub Stock API](https://finnhub.io/) for additional financial data.
 -   [Firebase](https://firebase.google.com/docs/reference) API for managing Cloud Messaging into the Mobile Platform.
 -   [novu](https://docs.novu.co/api-reference/overview) API for real-time Inbox and notifications.
 -   [web-push](https://www.npmjs.com/package/web-push) for push notifications.
@@ -72,15 +73,45 @@ cd hedgehog-finances
 npm i
 ```
 
-4. Run the project:
+4. Create a .env file in the root of your project directory and add the environmental variables (see [Environmental Variables](#environmental-variables))
+
+5. Start the development server:
 
 ```
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+
+
+### Environmental Variables
+| Variable Name     | Value |
+| ----------------- | ----- |
+| FINANCIAL_MODELING_API_KEY | Your API key for accessing Financial Modeling data |
+| FINANCIAL_MODELING_DATA_USAGE | Tracks your data usage for the Financial Modeling API |
+| NOVU_SECRET_KEY | Secret key for Novu notifications | 
+| NEXT_PUBLIC_NOVU_APP_ID |Public ID for the Novu application |
+| VAPID_PRIVATE_KEY | Private key for Web Push notifications (VAPID) |
+| NEXT_PUBLIC_PROJECTID | Project ID for web notifications | 
+| NEXT_PUBLIC_VAPID_PUBLIC | Public key for Web Push notifications (VAPID) |
+| NEXT_PUBLIC_NOTIFY_APPID | App ID for Firebase or other notification services |
+| NEXT_PUBLIC_MESSAGE_SENDER | Message sender ID for Firebase Cloud Messaging |
+| NEXT_PUBLIC_FIREBASEAPIKEY | Firebase API key for accessing Firebase services |
+| DATABASE_URL | Database connection string for MongoDB |
+| GOOGLE_CLIENT_ID | Google OAuth client ID for user authentication |
+| GOOGLE_CLIENT_SECRET | Google OAuth client secret for user authentication |
+| NEXTAUTH_URL | http://localhost:3000/ |
+| NEXTAUTH_SECRET | Secret for NextAuth.js used to encrypt tokens |
+| EDGE_STORE_ACCESS_KEY | Access key for your edge storage service |
+| EDGE_STORE_SECRET_KEY | Secret key for your edge storage service |
+| TWELVEDATA_KEY_ONE | API key for Twelve Data services (key 1) |
+| TWELVEDATA_KEY_TWO | API key for Twelve Data services (key 2) |
+| TWELVEDATA_KEY_THREE | API key for Twelve Data services (key 3) |
+| WEB_PUSH_PRIVATE_KEY | Private key for Web Push notifications |
+| NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY | Public key for Web Push notifications |
+| FINNHUB_KEY | API key for Finnhub stock market data |
 
 ## Minimum Version Requirements
 
@@ -127,7 +158,7 @@ Once users have created an account and are signed in, they can take advantage of
 -   **Dividends & News**: On the same page, users can see dividend information for the company, including the next payment date and the amount per share. Below this, a dynamic news feed is displayed, featuring a curated list of articles related to the company and its performance. Each news card is clickable, redirecting the user to the original article for further insights.
     ![Article Page](src/assets/screenshots/dividend_and_news.png)
 
--   **Dashboard**: Clicking 'Add to Watchlist' beside a company's stock symbol seamlessly adds that company to the user's personalized Dashboard, accessible via the 'Dashboard' link in the top left corner of the page. The Dashboard provides an overview of all watchlisted companies, displaying their stock performance graphs simultaneously for easy comparison and monitoring.
+-   **Dashboard**: Clicking 'Add to Watchlist' beside a company's stock symbol seamlessly adds that company to the user's personalized Dashboard, accessible via the 'Dashboard' link in the top left corner of the page. The Dashboard provides an overview of all watchlisted companies, displaying their stock performance graphs simultaneously for easy comparison and monitoring. To remove a company from the watchlist, simply click the company tile, then click 'Remove from Watchlist'.
     ![Article Page](src/assets/screenshots/dashboard.png)
 
 -   **Set Alerts**: If a company is added to a user's watchlist, they can click the 'Set Alerts' button located beside the company's stock symbol. This allows the user to customize their notification preferences for that stock. Notifications can be received via In-App Alerts, Email Notifications, and/or Push Notifications. Users can select one or more of these options based on their preferences.
@@ -163,5 +194,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 This portfolio project was created as part of a Digital Skills Boot-camp in Software Engineering provided by [Northcoders](https://northcoders.com/)
 
 ---
-
 We hope you find this README helpful!
